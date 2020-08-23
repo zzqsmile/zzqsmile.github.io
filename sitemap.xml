@@ -438,6 +438,13 @@
   </url>
   
   <url>
+    <loc>http://zzqsmile.top/tags/mysql/</loc>
+    <lastmod>2020-08-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://zzqsmile.top/tags/linux%E4%B9%8B%E6%8A%80%E8%83%BD%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2020-08-23</lastmod>
     <changefreq>daily</changefreq>
@@ -460,13 +467,6 @@
   
   <url>
     <loc>http://zzqsmile.top/tags/%E5%8F%8D%E5%BC%B9shell/</loc>
-    <lastmod>2020-08-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://zzqsmile.top/tags/mysql/</loc>
     <lastmod>2020-08-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -636,14 +636,14 @@
   </url>
   
   <url>
-    <loc>http://zzqsmile.top/categories/Linux/</loc>
+    <loc>http://zzqsmile.top/categories/Database/</loc>
     <lastmod>2020-08-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://zzqsmile.top/categories/Database/</loc>
+    <loc>http://zzqsmile.top/categories/Linux/</loc>
     <lastmod>2020-08-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -678,14 +678,14 @@
   </url>
   
   <url>
-    <loc>http://zzqsmile.top/categories/%E5%85%B6%E4%BB%96/</loc>
+    <loc>http://zzqsmile.top/categories/%E7%BC%96%E7%A0%81/</loc>
     <lastmod>2020-08-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://zzqsmile.top/categories/%E7%BC%96%E7%A0%81/</loc>
+    <loc>http://zzqsmile.top/categories/%E5%85%B6%E4%BB%96/</loc>
     <lastmod>2020-08-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -706,14 +706,14 @@
   </url>
   
   <url>
-    <loc>http://zzqsmile.top/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/</loc>
+    <loc>http://zzqsmile.top/categories/%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/</loc>
     <lastmod>2020-08-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://zzqsmile.top/categories/%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/</loc>
+    <loc>http://zzqsmile.top/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/</loc>
     <lastmod>2020-08-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
