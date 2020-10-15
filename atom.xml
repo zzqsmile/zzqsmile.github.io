@@ -385,27 +385,6 @@
   </entry>
   
   <entry>
-    <title>优秀博客文章笔记</title>
-    <link href="http://zzqsmile.top/2018/10/08/%E5%85%B6%E4%BB%96/d/%E4%BC%98%E7%A7%80%E5%8D%9A%E5%AE%A2%E9%93%BE%E6%8E%A5%E6%94%B6%E8%97%8F/"/>
-    <id>http://zzqsmile.top/2018/10/08/%E5%85%B6%E4%BB%96/d/%E4%BC%98%E7%A7%80%E5%8D%9A%E5%AE%A2%E9%93%BE%E6%8E%A5%E6%94%B6%E8%97%8F/</id>
-    <published>2018-10-08T01:00:00.000Z</published>
-    <updated>2019-04-04T13:51:30.000Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>本片文章主要对网上比较好的博客博主网站做个笔记，也算快速导航吧，方便学习</strong></p><a id="more"></a><h5 id="大佬博客"><a href="#大佬博客" class="headerlink" title="大佬博客"></a>大佬博客</h5><blockquote><p>reber</p></blockquote><p>简书：<br><a href="https://www.jianshu.com/u/cc008b01f306">https://www.jianshu.com/u/cc008b01f306</a></p><p>个人：<br><a href="http://wyb0.com/">http://wyb0.com/</a></p><p>github:<br><a href="https://github.com/reber0">https://github.com/reber0</a></p><hr><blockquote><p>离别歌</p></blockquote><p><a href="https://www.leavesongs.com/">https://www.leavesongs.com/</a></p><hr><p><strong>友情链接</strong></p><blockquote><p>zksmile</p></blockquote><p>简书：<br><a href="https://www.jianshu.com/u/49a7ed0ab6a3">https://www.jianshu.com/u/49a7ed0ab6a3</a></p><p>个人：<br><a href="http://zksmile.me/">http://zksmile.me/</a></p><hr><blockquote><p>Climber</p></blockquote><p>giyhub: <a href="http://lawlietweb.com/">http://lawlietweb.com/</a></p><hr><blockquote><p>moxiaoxii<br><a href="http://momomoxiaoxi.com/2016/10/22/Websecurity/">http://momomoxiaoxi.com/2016/10/22/Websecurity/</a></p></blockquote>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;&lt;strong&gt;本片文章主要对网上比较好的博客博主网站做个笔记，也算快速导航吧，方便学习&lt;/strong&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="其他" scheme="http://zzqsmile.top/categories/%E5%85%B6%E4%BB%96/"/>
-    
-    
-    <category term="其他" scheme="http://zzqsmile.top/tags/%E5%85%B6%E4%BB%96/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Linux CentOS查看硬件信息大全</title>
     <link href="http://zzqsmile.top/2018/10/03/%E8%BF%90%E7%BB%B4%E5%AE%89%E5%85%A8/Linux_CentOS%E6%9F%A5%E7%9C%8B%E7%A1%AC%E4%BB%B6%E4%BF%A1%E6%81%AF%E5%A4%A7%E5%85%A8/"/>
     <id>http://zzqsmile.top/2018/10/03/%E8%BF%90%E7%BB%B4%E5%AE%89%E5%85%A8/Linux_CentOS%E6%9F%A5%E7%9C%8B%E7%A1%AC%E4%BB%B6%E4%BF%A1%E6%81%AF%E5%A4%A7%E5%85%A8/</id>
@@ -451,6 +430,29 @@
     
     <category term="渗透测试" scheme="http://zzqsmile.top/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
+    
+  </entry>
+  
+  <entry>
+    <title>XJNU-CTF 2018</title>
+    <link href="http://zzqsmile.top/2018/09/25/CTF/XJNU-CTF_2018/"/>
+    <id>http://zzqsmile.top/2018/09/25/CTF/XJNU-CTF_2018/</id>
+    <published>2018-09-25T01:00:00.000Z</published>
+    <updated>2018-11-26T06:38:02.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>闲来无事，最近在做CTF题，感觉再不练练手我就废了。</p></blockquote><a id="more"></a><h4 id="1-本地文件包含-文件上传拿flag"><a href="#1-本地文件包含-文件上传拿flag" class="headerlink" title="1.本地文件包含+文件上传拿flag"></a>1.本地文件包含+文件上传拿<code>flag</code></h4><ul><li>地址题目：<a href="http://ctf.xjnu.edu.cn:666/">http://ctf.xjnu.edu.cn:666/ </a></li></ul><p><img src="http://qiniuyun.zzqsmile.top/blog/180925/bkE9kmhaHi.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p><ul><li>题目分析：</li></ul><blockquote><p>看到题目，有两种思路：1).利用文件上传拿<code>webshell</code>，然后找到<code>flag</code>; 2).利用文件包含拿<code>webshell</code>，然后找到<code>flag</code>。 目标很明确，思路也有，然后实践操作，结果发现文件上传走不通，然后想利用文件包含漏洞可以读文件，经证实的确可以读取到文件，但是要找<code>flag</code>就比较难了，因为我不知道<code>flag</code>在哪啊！于是就有另一种想法，利用远程文件包含拿<code>webshell</code>，后来经读<code>upload.php</code>源码发现，应该是不能远程文件包含的。那么最后就剩本地文件包含了，正好呢此处可以上传文件，因此先上传一个图片，不过图片内容改为一句话木马，然后包含这个图片，此时图片里面的一句话木马就会被解析执行，这样我们就拿到了<code>webshell</code>.</p></blockquote><p><strong>具体操作如下，正好回顾下基础知识</strong></p><ul><li>利用文件包含读本地文件<code>/etc/passwd</code></li></ul><p><img src="http://qiniuyun.zzqsmile.top/blog/180925/8C3eb1dEFI.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p><ul><li>由于最后知道了<code>flag</code>文件名和路径，这里就顺便演示下，如下：</li></ul><p><img src="http://qiniuyun.zzqsmile.top/blog/180925/6BA8iHImcG.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p><ul><li>读取<code>upload.php</code>文件源码</li></ul><p><strong>读取格式</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file&#x3D;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;文件名</span><br></pre></td></tr></table></figure><p><img src="http://qiniuyun.zzqsmile.top/blog/180925/GKidJmj9ek.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p><p><strong>然后base64解码</strong></p><p><img src="http://qiniuyun.zzqsmile.top/blog/180925/0Cad66DjkC.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p><blockquote><p>此时看到<code>upload.php</code>源码，可知文件上传拿webshell是行不通的</p></blockquote><ul><li>同样读取<code>index.php</code>，如下：</li></ul><p><img src="http://qiniuyun.zzqsmile.top/blog/180925/LFmmaD9jJL.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p><p><strong>然后base64解码</strong></p><p><img src="http://qiniuyun.zzqsmile.top/blog/180925/EhC0jf4Ck0.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p><blockquote><p>可以看出，此文件包含是对包含文件参数<code>file</code>是做了正则匹配过滤的。</p></blockquote><p><strong>解题</strong></p><ul><li>上传图片<code>zzqsmile.jpg</code>，然后抓包写一句话。</li></ul><p><img src="http://qiniuyun.zzqsmile.top/blog/180925/GH8DcghaKE.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p><ul><li>上传成功！</li></ul><p><img src="http://qiniuyun.zzqsmile.top/blog/180925/gbFLm573a8.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p><ul><li>然后包含上传的图片<code>upload/zzqsmile.jpg</code>，如下：</li></ul><p><img src="http://qiniuyun.zzqsmile.top/blog/180925/KmGL6C7eHI.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p><ul><li>ok!下面就可以用菜刀尝试连接了。</li></ul><p><img src="http://qiniuyun.zzqsmile.top/blog/180925/4390187jeD.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p><blockquote><p>nice! 没毛病！</p></blockquote><ul><li>最后就简单了，找<code>flag</code>。</li></ul><p><img src="http://qiniuyun.zzqsmile.top/blog/180925/hLJ4fDDcf4.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p><blockquote><p>flag: flag{pHp_Lfi_t0_Be_Shell!} 之前读文件读的就是这个文件。</p></blockquote><hr><h4 id="2-SQL注入拿flag"><a href="#2-SQL注入拿flag" class="headerlink" title="2.SQL注入拿flag"></a>2.SQL注入拿<code>flag</code></h4><ul><li>题目地址： <a href="http://ctf.xjnu.edu.cn:9900/web10/">http://ctf.xjnu.edu.cn:9900/web10/</a></li></ul><p><img src="http://qiniuyun.zzqsmile.top/blog/180925/AhFjkG491i.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p><ul><li>题目分析： 很明显根据提示信息，此题是道SQL注入的题目，可以看下源码，或者直接可以尝试<code>index.php?id=1</code>。</li></ul><p><img src="http://qiniuyun.zzqsmile.top/blog/180925/FAai1bbceL.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p><p><img src="http://qiniuyun.zzqsmile.top/blog/180925/a7ah5AGLLk.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p><blockquote><p>可以发现，此处可能就是注入点，经确认的确存在注入。</p></blockquote><ul><li>下面就是sql注入流程一顿操作，最后得到<code>flag</code>。</li></ul><p><img src="http://qiniuyun.zzqsmile.top/blog/180925/0jfjG4Hm1c.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p><blockquote><p>解题完毕！</p></blockquote>]]></content>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;闲来无事，最近在做CTF题，感觉再不练练手我就废了。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="CTF" scheme="http://zzqsmile.top/categories/CTF/"/>
+    
+    
+    <category term="CTF" scheme="http://zzqsmile.top/tags/CTF/"/>
     
   </entry>
   
