@@ -2,7 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://zzqsmile.top/2018/10/08/d/ceshi/</loc>
+    <loc>http://zzqsmile.top/2020/10/15/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/whois%E4%BF%A1%E6%81%AF%E6%9F%A5%E8%AF%A2/</loc>
+    
+    <lastmod>2020-10-15</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zzqsmile.top/2020/10/15/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%A4%87%E6%A1%88%E4%BF%A1%E6%81%AF%E6%9F%A5%E8%AF%A2/</loc>
+    
+    <lastmod>2020-10-15</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zzqsmile.top/2020/10/15/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%AD%90%E5%9F%9F%E5%90%8D%E6%94%B6%E9%9B%86/</loc>
     
     <lastmod>2020-10-15</lastmod>
     
@@ -633,6 +647,13 @@
     <priority>0.6</priority>
   </url>
   
+  <url>
+    <loc>http://zzqsmile.top/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</loc>
+    <lastmod>2020-10-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
 
   
   <url>
@@ -734,21 +755,7 @@
   </url>
   
   <url>
-    <loc>http://zzqsmile.top/categories/%E6%B5%8B%E8%AF%95/</loc>
-    <lastmod>2020-10-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://zzqsmile.top/categories/%E6%B5%8B%E8%AF%95/zzq/</loc>
-    <lastmod>2020-10-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://zzqsmile.top/categories/%E6%B5%8B%E8%AF%95/zzq/wode/</loc>
+    <loc>http://zzqsmile.top/categories/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</loc>
     <lastmod>2020-10-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
