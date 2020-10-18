@@ -138,9 +138,9 @@
     <link href="http://zzqsmile.top/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/"/>
     <id>http://zzqsmile.top/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/</id>
     <published>2020-10-18T12:00:00.000Z</published>
-    <updated>2020-10-18T07:21:40.948Z</updated>
+    <updated>2020-10-18T07:51:26.695Z</updated>
     
-    <content type="html"><![CDATA[<a id="more"></a><h3 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h3><ul><li><p>1.nmap</p></li><li><p>2.在线端口检测</p></li></ul><blockquote><p><a href="http://coolaf.com/tool/port">http://coolaf.com/tool/port</a></p></blockquote><ul><li><p>3.端口扫描器</p><ul><li>御剑高速端口扫描器</li></ul><blockquote><p><a href="https://pan.baidu.com/share/init?surl=Uh-FWsXOUlVUM3ZOpRWoYQ">https://pan.baidu.com/share/init?surl=Uh-FWsXOUlVUM3ZOpRWoYQ</a> 提取码: czne</p></blockquote><p>常见端口及对应服务和攻击方式整理如下:</p><p><img src="https://mmbiz.qpic.cn/mmbiz_png/ffq88LJJ8oPhzuqa2g06cq4ibd8KROg1zuIyD3k7JqF6OYbvITretWgKlVPP7AbddZM3MdQRcTccjTgOyM9GZgw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1"></p></li></ul><h3 id="常用的端口利用及解析总结"><a href="#常用的端口利用及解析总结" class="headerlink" title="常用的端口利用及解析总结"></a>常用的端口利用及解析总结</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">端口：21 服务：FTP&#x2F;TFTP&#x2F;VSFTPD 总结：爆破&#x2F;嗅探&#x2F;溢出&#x2F;后门</span><br><span class="line">端口：22 服务：ssh远程连接      总结：爆破&#x2F;openssh漏洞</span><br><span class="line">端口：23 服务：Telnet远程连接   总结：爆破&#x2F;嗅探&#x2F;弱口令</span><br><span class="line">端口：25 服务：SMTP邮件服务     总结：邮件伪造</span><br><span class="line">端口：53 服务：DNS域名解析系统   总结：域传送&#x2F;劫持&#x2F;缓存投毒&#x2F;欺骗</span><br><span class="line">端口：67&#x2F;68 服务：dhcp服务      总结：劫持&#x2F;欺骗</span><br><span class="line">端口：110 服务：pop3              总结：爆破&#x2F;嗅探</span><br><span class="line">端口：139 服务：Samba服务         总结：爆破&#x2F;未授权访问&#x2F;远程命令执行</span><br><span class="line">端口：143 服务：Imap协议         总结：爆破161SNMP协议爆破&#x2F;搜集目标内网信息</span><br><span class="line">端口：389 服务：Ldap目录访问协议 总结：注入&#x2F;未授权访问&#x2F;弱口令</span><br><span class="line">端口：445 服务：smb              总结：ms17-010&#x2F;端口溢出</span><br><span class="line">端口：512&#x2F;513&#x2F;514 服务：Linux Rexec服务 总结：爆破&#x2F;Rlogin登陆</span><br><span class="line">端口：873 服务：Rsync服务                 总结：文件上传&#x2F;未授权访问</span><br><span class="line">端口：1080 服务：socket                  总结：爆破</span><br><span class="line">端口：1352 服务：Lotus domino邮件服务   总结：爆破&#x2F;信息泄漏</span><br><span class="line">端口：1433 服务：mssql                  总结：爆破&#x2F;注入&#x2F;SA弱口令</span><br><span class="line">端口：1521 服务：oracle       总结：爆破&#x2F;注入&#x2F;TNS爆破&#x2F;反弹shell2049Nfs服务配置不当</span><br><span class="line">端口：2181 服务：zookeeper服务            总结：未授权访问</span><br><span class="line">端口：2375 服务：docker remote api    总结：未授权访问</span><br><span class="line">端口：3306 服务：mysql                 总结：爆破&#x2F;注入</span><br><span class="line">端口：3389 服务：Rdp远程桌面链接        总结：爆破&#x2F;shift后门</span><br><span class="line">端口：4848 服务：GlassFish控制台       总结：爆破&#x2F;认证绕过</span><br><span class="line">端口：5000 服务：sybase&#x2F;DB2数据库      总结：爆破&#x2F;注入&#x2F;提权</span><br><span class="line">端口：5432 服务：postgresql             总结：爆破&#x2F;注入&#x2F;缓冲区溢出</span><br><span class="line">端口：5632 服务：pcanywhere服务        总结：抓密码&#x2F;代码执行</span><br><span class="line">端口：5900 服务：vnc                     总结：爆破&#x2F;认证绕过</span><br><span class="line">端口：6379 服务：Redis数据库           总结：未授权访问&#x2F;爆破</span><br><span class="line">端口：7001&#x2F;7002 服务：weblogic         总结：java反序列化&#x2F;控制台弱口令</span><br><span class="line">端口：80&#x2F;443 服务：http&#x2F;https         总结：web应用漏洞&#x2F;心脏滴血</span><br><span class="line">端口：8069 服务：zabbix服务            总结：远程命令执行&#x2F;注入</span><br><span class="line">端口：8161 服务：activemq             总结：弱口令&#x2F;写文件</span><br><span class="line">端口：8080&#x2F;8089 服务：Jboss&#x2F;Tomcat&#x2F;Resin 总结：爆破&#x2F;PUT文件上传&#x2F;反序列化</span><br><span class="line">端口：8083&#x2F;8086 服务：influxDB         总结：未授权访问</span><br><span class="line">端口：9000 服务：fastcgi                 总结：远程命令执行</span><br><span class="line">端口：9090 服务：Websphere             总结：控制台爆破&#x2F;java反序列化&#x2F;弱口令</span><br><span class="line">端口：9200&#x2F;9300 服务：elasticsearch   总结：远程代码执行</span><br><span class="line">端口：11211 服务：memcached             总结：未授权访问</span><br><span class="line">端口：27017&#x2F;27018 服务：mongodb         总结：未授权访问&#x2F;爆破</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<a id="more"></a><h3 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h3><ul><li><p>1.nmap</p></li><li><p>2.在线端口检测</p></li></ul><blockquote><p><a href="http://coolaf.com/tool/port">http://coolaf.com/tool/port</a></p></blockquote><ul><li><p>3.端口扫描器</p><ul><li>御剑高速端口扫描器</li></ul><blockquote><p><a href="https://pan.baidu.com/share/init?surl=Uh-FWsXOUlVUM3ZOpRWoYQ">https://pan.baidu.com/share/init?surl=Uh-FWsXOUlVUM3ZOpRWoYQ</a> 提取码: czne</p></blockquote><p>常见端口及对应服务和攻击方式整理如下:</p><p><img src="https://mmbiz.qpic.cn/mmbiz_png/ffq88LJJ8oPhzuqa2g06cq4ibd8KROg1zuIyD3k7JqF6OYbvITretWgKlVPP7AbddZM3MdQRcTccjTgOyM9GZgw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1"></p></li></ul><h3 id="常用的端口利用及解析总结"><a href="#常用的端口利用及解析总结" class="headerlink" title="常用的端口利用及解析总结"></a>常用的端口利用及解析总结</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">端口：21 服务：FTP&#x2F;TFTP&#x2F;VSFTPD        总结：爆破&#x2F;嗅探&#x2F;溢出&#x2F;后门</span><br><span class="line">端口：22 服务：ssh远程连接              总结：爆破&#x2F;openssh漏洞</span><br><span class="line">端口：23 服务：Telnet远程连接           总结：爆破&#x2F;嗅探&#x2F;弱口令</span><br><span class="line">端口：25 服务：SMTP邮件服务             总结：邮件伪造</span><br><span class="line">端口：53 服务：DNS域名解析系统           总结：域传送&#x2F;劫持&#x2F;缓存投毒&#x2F;欺骗</span><br><span class="line">端口：67&#x2F;68 服务：dhcp服务              总结：劫持&#x2F;欺骗</span><br><span class="line">端口：110 服务：pop3                  总结：爆破&#x2F;嗅探</span><br><span class="line">端口：139 服务：Samba服务             总结：爆破&#x2F;未授权访问&#x2F;远程命令执行</span><br><span class="line">端口：143 服务：Imap协议                 总结：爆破161SNMP协议爆破&#x2F;搜集目标内网信息</span><br><span class="line">端口：389 服务：Ldap目录访问协议         总结：注入&#x2F;未授权访问&#x2F;弱口令</span><br><span class="line">端口：445 服务：smb                  总结：ms17-010&#x2F;端口溢出</span><br><span class="line">端口：512&#x2F;513&#x2F;514 服务：Linux Rexec服务     总结：爆破&#x2F;Rlogin登陆</span><br><span class="line">端口：873 服务：Rsync服务                总结：文件上传&#x2F;未授权访问</span><br><span class="line">端口：1080 服务：socket                 总结：爆破</span><br><span class="line">端口：1352 服务：Lotus domino邮件服务    总结：爆破&#x2F;信息泄漏</span><br><span class="line">端口：1433 服务：mssql                  总结：爆破&#x2F;注入&#x2F;SA弱口令</span><br><span class="line">端口：1521 服务：oracle            总结：爆破&#x2F;注入&#x2F;TNS爆破&#x2F;反弹shell2049Nfs服务配置不当</span><br><span class="line">端口：2181 服务：zookeeper服务        总结：未授权访问</span><br><span class="line">端口：2375 服务：docker remote api    总结：未授权访问</span><br><span class="line">端口：3306 服务：mysql                    总结：爆破&#x2F;注入</span><br><span class="line">端口：3389 服务：Rdp远程桌面链接            总结：爆破&#x2F;shift后门</span><br><span class="line">端口：4848 服务：GlassFish控制台           总结：爆破&#x2F;认证绕过</span><br><span class="line">端口：5000 服务：sybase&#x2F;DB2数据库        总结：爆破&#x2F;注入&#x2F;提权</span><br><span class="line">端口：5432 服务：postgresql        总结：爆破&#x2F;注入&#x2F;缓冲区溢出</span><br><span class="line">端口：5632 服务：pcanywhere服务        总结：抓密码&#x2F;代码执行</span><br><span class="line">端口：5900 服务：vnc            总结：爆破&#x2F;认证绕过</span><br><span class="line">端口：6379 服务：Redis数据库              总结：未授权访问&#x2F;爆破</span><br><span class="line">端口：7001&#x2F;7002 服务：weblogic           总结：java反序列化&#x2F;控制台弱口令</span><br><span class="line">端口：80&#x2F;443 服务：http&#x2F;https            总结：web应用漏洞&#x2F;心脏滴血</span><br><span class="line">端口：8069 服务：zabbix服务               总结：远程命令执行&#x2F;注入</span><br><span class="line">端口：8161 服务：activemq                总结：弱口令&#x2F;写文件</span><br><span class="line">端口：8080&#x2F;8089 服务：Jboss&#x2F;Tomcat&#x2F;Resin 总结：爆破&#x2F;PUT文件上传&#x2F;反序列化</span><br><span class="line">端口：8083&#x2F;8086 服务：influxDB           总结：未授权访问</span><br><span class="line">端口：9000 服务：fastcgi                 总结：远程命令执行</span><br><span class="line">端口：9090 服务：Websphere               总结：控制台爆破&#x2F;java反序列化&#x2F;弱口令</span><br><span class="line">端口：9200&#x2F;9300 服务：elasticsearch      总结：远程代码执行</span><br><span class="line">端口：11211 服务：memcached              总结：未授权访问</span><br><span class="line">端口：27017&#x2F;27018 服务：mongodb          总结：未授权访问&#x2F;爆破</span><br></pre></td></tr></table></figure>]]></content>
     
     
       
@@ -151,6 +151,37 @@
 &lt;li&gt;&lt;p&gt;1.nmap&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;2.在线端口检测&lt;/</summary>
+      
+    
+    
+    
+    <category term="信息收集" scheme="http://zzqsmile.top/categories/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
+    
+    
+    <category term="信息收集" scheme="http://zzqsmile.top/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>参考</title>
+    <link href="http://zzqsmile.top/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%8F%82%E8%80%83/"/>
+    <id>http://zzqsmile.top/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%8F%82%E8%80%83/</id>
+    <published>2020-10-18T12:00:00.000Z</published>
+    <updated>2020-10-18T07:52:55.904Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a><p>更多参考</p><ul><li>1</li></ul><blockquote><p><a href="https://qftm.github.io/Information_Collection_Handbook/">https://qftm.github.io/Information_Collection_Handbook/</a></p></blockquote><ul><li>2</li></ul><blockquote><p><a href="https://mp.weixin.qq.com/s/UA7nPAKXq19LlPz1zgdZ0w">https://mp.weixin.qq.com/s/UA7nPAKXq19LlPz1zgdZ0w</a></p></blockquote>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+&lt;p&gt;更多参考&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;1&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://qftm.github.io/Information_Collection_Handbook/&quot;&gt;https</summary>
       
     
     
@@ -486,27 +517,6 @@
     
     
     <category term="web安全" scheme="http://zzqsmile.top/categories/web%E5%AE%89%E5%85%A8/"/>
-    
-    
-    <category term="传送门" scheme="http://zzqsmile.top/tags/%E4%BC%A0%E9%80%81%E9%97%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CTF必备技能之编码大全</title>
-    <link href="http://zzqsmile.top/2019/03/29/%E4%BC%A0%E9%80%81%E9%97%A8/%E7%BC%96%E7%A0%81/"/>
-    <id>http://zzqsmile.top/2019/03/29/%E4%BC%A0%E9%80%81%E9%97%A8/%E7%BC%96%E7%A0%81/</id>
-    <published>2019-03-29T01:00:00.000Z</published>
-    <updated>2019-03-29T14:11:56.000Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>本片文章为传送门，其内容是关于编码的知识讲解</strong></p><a id="more"></a><p><a href="https://mp.weixin.qq.com/s/a28yG1bBg-dyyZNG0R8qKw">https://mp.weixin.qq.com/s/a28yG1bBg-dyyZNG0R8qKw</a></p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;&lt;strong&gt;本片文章为传送门，其内容是关于编码的知识讲解&lt;/strong&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="编码" scheme="http://zzqsmile.top/categories/%E7%BC%96%E7%A0%81/"/>
     
     
     <category term="传送门" scheme="http://zzqsmile.top/tags/%E4%BC%A0%E9%80%81%E9%97%A8/"/>

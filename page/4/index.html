@@ -243,7 +243,7 @@
                             &nbsp;
                             信息收集
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2020/10/15/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/whois%E4%BF%A1%E6%81%AF%E6%9F%A5%E8%AF%A2/">whois信息查询</a></li>  <li class="file"><a href="/2020/10/15/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%AD%90%E5%9F%9F%E5%90%8D%E6%94%B6%E9%9B%86/">子域名收集</a></li>  <li class="file"><a href="/2020/10/15/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%A4%87%E6%A1%88%E4%BF%A1%E6%81%AF%E6%9F%A5%E8%AF%A2/">备案信息查询</a></li>  <li class="file"><a href="/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%AF%BB%E6%89%BE%E7%9C%9F%E5%AE%9EIP/">寻找真实IP</a></li>  <li class="file"><a href="/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/">指纹识别</a></li>  <li class="file"><a href="/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E6%97%81%E7%AB%99%E5%92%8CC%E6%AE%B5/">旁站和C段</a></li>  <li class="file"><a href="/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E7%9B%AE%E5%BD%95%E6%89%AB%E6%8F%8F/">目录扫描</a></li>  <li class="file"><a href="/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/">端口扫描</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2020/10/15/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/whois%E4%BF%A1%E6%81%AF%E6%9F%A5%E8%AF%A2/">whois信息查询</a></li>  <li class="file"><a href="/2020/10/15/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%AD%90%E5%9F%9F%E5%90%8D%E6%94%B6%E9%9B%86/">子域名收集</a></li>  <li class="file"><a href="/2020/10/15/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%A4%87%E6%A1%88%E4%BF%A1%E6%81%AF%E6%9F%A5%E8%AF%A2/">备案信息查询</a></li>  <li class="file"><a href="/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%AF%BB%E6%89%BE%E7%9C%9F%E5%AE%9EIP/">寻找真实IP</a></li>  <li class="file"><a href="/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/">指纹识别</a></li>  <li class="file"><a href="/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E6%97%81%E7%AB%99%E5%92%8CC%E6%AE%B5/">旁站和C段</a></li>  <li class="file"><a href="/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E7%9B%AE%E5%BD%95%E6%89%AB%E6%8F%8F/">目录扫描</a></li>  <li class="file"><a href="/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/">端口扫描</a></li>  <li class="file"><a href="/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%8F%82%E8%80%83/">参考</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -380,6 +380,88 @@
 </aside>
             
             <section id="main">
+        <article id="post-web安全/sql盲注奇淫技巧之dnslog" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/web%E5%AE%89%E5%85%A8/">web安全</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/06/18/web%E5%AE%89%E5%85%A8/sql%E7%9B%B2%E6%B3%A8%E5%A5%87%E6%B7%AB%E6%8A%80%E5%B7%A7%E4%B9%8Bdnslog/">
+            <time datetime="2018-06-18T01:00:00.000Z" itemprop="datePublished">2018-06-18</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/zzqsmile/Wiki-site/raw/writing/source/_posts/web安全/sql盲注奇淫技巧之dnslog.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/zzqsmile/Wiki-site/edit/writing/source/_posts/web安全/sql盲注奇淫技巧之dnslog.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/zzqsmile/Wiki-site/commits/writing/source/_posts/web安全/sql盲注奇淫技巧之dnslog.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/06/18/web%E5%AE%89%E5%85%A8/sql%E7%9B%B2%E6%B3%A8%E5%A5%87%E6%B7%AB%E6%8A%80%E5%B7%A7%E4%B9%8Bdnslog/">SQL注入奇淫技巧——利用dnslog获取看不到的信息</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                <p><blockquote>
+<p>对于sql盲注，常用的方法应该是二分法了，为此之前还写过通过二分法猜解的半自动化python脚本，说实话，python脚本比起手动真的已经是好多了，可是我内心其实还是挺怵写脚本的，而且这种脚本二分法猜解发送的请求频繁麻烦不说，还容易被waf检测到，以至于ip被封。于是最近学习了一种sql盲注的奇淫技巧。</p>
+</blockquote></p>
+            
+        
+        
+            </div>   
+            <div class="article-more-link">
+                <a href="/2018/06/18/web%E5%AE%89%E5%85%A8/sql%E7%9B%B2%E6%B3%A8%E5%A5%87%E6%B7%AB%E6%8A%80%E5%B7%A7%E4%B9%8Bdnslog/#more">Read More</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
         <article id="post-web安全/mysql报错注入原理分析之floor" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -1096,86 +1178,6 @@
             </div>   
             <div class="article-more-link">
                 <a href="/2018/05/02/CTF/iscc-2018-web-002/#more">Read More</a>
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-CTF/iscc-2018-web-001" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/CTF/">CTF</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link-link" href="/tags/CTF/" rel="tag">CTF</a>
-    </div>
-
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/05/01/CTF/iscc-2018-web-001/">
-            <time datetime="2018-05-01T01:00:00.000Z" itemprop="datePublished">2018-05-01</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a target="_blank" rel="noopener" href='https://github.com/zzqsmile/Wiki-site/raw/writing/source/_posts/CTF/iscc-2018-web-001.md'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a target="_blank" rel="noopener" href='https://github.com/zzqsmile/Wiki-site/edit/writing/source/_posts/CTF/iscc-2018-web-001.md'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a target="_blank" rel="noopener" href='https://github.com/zzqsmile/Wiki-site/commits/writing/source/_posts/CTF/iscc-2018-web-001.md'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/05/01/CTF/iscc-2018-web-001/">CTF-2018-Web-比较数字大小</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                <p><h4 id="题目地址：http-118-190-152-202-8014"><a href="#题目地址：http-118-190-152-202-8014" class="headerlink" title="题目地址：http://118.190.152.202:8014/"></a>题目地址：<a target="_blank" rel="noopener" href="http://118.190.152.202:8014/">http://118.190.152.202:8014/</a></h4><p><em>比赛结束后地址可能失效</em></p></p>
-            
-        
-        
-            </div>   
-            <div class="article-more-link">
-                <a href="/2018/05/01/CTF/iscc-2018-web-001/#more">Read More</a>
             </div>
         
         <footer class="article-footer">
