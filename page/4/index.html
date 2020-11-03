@@ -347,7 +347,7 @@
                             &nbsp;
                             MYSQL
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2020/10/28/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL_union%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2/">MySQL_union联合查询</a></li>  <li class="file"><a href="/2020/10/28/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/">MySQL数据库基本知识学习</a></li>  <li class="file"><a href="/2020/10/28/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL_%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/">MySQL_报错注入</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2020/10/28/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL_union%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2/">MySQL_union联合查询</a></li>  <li class="file"><a href="/2020/10/28/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/">MySQL数据库基本知识学习</a></li>  <li class="file"><a href="/2020/10/28/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL_%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/">MySQL_报错注入</a></li>  <li class="file"><a href="/2020/11/03/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL_%E5%B8%83%E5%B0%94%E6%B3%A8%E5%85%A5/">MySQL_布尔注入</a></li>  </ul> 
                     </li> 
                      </ul> 
                     </li> 
@@ -452,6 +452,89 @@
 </aside>
             
             <section id="main">
+        <article id="post-CTF/CTF入门篇writeup_D0g3Games" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/CTF/">CTF</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/CTF/" rel="tag">CTF</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/10/31/CTF/CTF%E5%85%A5%E9%97%A8%E7%AF%87writeup_D0g3Games/">
+            <time datetime="2018-10-31T01:00:00.000Z" itemprop="datePublished">2018-10-31</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/zzqsmile/Wiki-site/raw/writing/source/_posts/CTF/CTF入门篇writeup_D0g3Games.md'> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/zzqsmile/Wiki-site/edit/writing/source/_posts/CTF/CTF入门篇writeup_D0g3Games.md'> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="noopener" href='https://github.com/zzqsmile/Wiki-site/commits/writing/source/_posts/CTF/CTF入门篇writeup_D0g3Games.md'> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/10/31/CTF/CTF%E5%85%A5%E9%97%A8%E7%AF%87writeup_D0g3Games/">CTF入门篇writeup——D0g3 Games</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                <p><meta name="referrer" content="no-referrer"/>
+
+<p><em>今天在网上找到一个CTF的小游戏，题目我做了几道感觉挺简单，很适合入门，之前了解CTF，参加各种杯或者是看各种比赛题的writeup，感觉太难了，想到这我还是决定从点滴做起，记录一下学习过程，同时也想做一套CTF从入门到精通的教程。</em></p>
+<p>网址：<a target="_blank" rel="noopener" href="http://ctf.d0g3.cn/">http://ctf.d0g3.cn/</a></p></p>
+            
+        
+        
+            </div>   
+            <div class="article-more-link">
+                <a href="/2018/10/31/CTF/CTF%E5%85%A5%E9%97%A8%E7%AF%87writeup_D0g3Games/#more">Read More</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
         <article id="post-其他/优秀博客链接收藏" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -1186,88 +1269,6 @@
             </div>   
             <div class="article-more-link">
                 <a href="/2018/06/05/python3/2018-06-05-%E6%8A%A5%E9%94%99/#more">Read More</a>
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-工具使用/burpsuite实战指南" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/tools/">tools</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link-link" href="/tags/burpsuite/" rel="tag">burpsuite</a>
-    </div>
-
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/06/05/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/burpsuite%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/">
-            <time datetime="2018-06-05T01:00:00.000Z" itemprop="datePublished">2018-06-05</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a target="_blank" rel="noopener" href='https://github.com/zzqsmile/Wiki-site/raw/writing/source/_posts/工具使用/burpsuite实战指南.md'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a target="_blank" rel="noopener" href='https://github.com/zzqsmile/Wiki-site/edit/writing/source/_posts/工具使用/burpsuite实战指南.md'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a target="_blank" rel="noopener" href='https://github.com/zzqsmile/Wiki-site/commits/writing/source/_posts/工具使用/burpsuite实战指南.md'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/06/05/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/burpsuite%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/">burpsuite使用教程</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                <p><blockquote>
-<p>burpsuite使用教程传送门</p>
-</blockquote></p>
-            
-        
-        
-            </div>   
-            <div class="article-more-link">
-                <a href="/2018/06/05/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/burpsuite%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/#more">Read More</a>
             </div>
         
         <footer class="article-footer">
