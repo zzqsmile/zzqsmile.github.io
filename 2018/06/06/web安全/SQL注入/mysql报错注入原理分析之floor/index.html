@@ -1,542 +1,4 @@
-<!DOCTYPE html>
-<html lang=en>
-<head>
-    <meta charset="utf-8">
-    
-    <title>mysql报错注入原理分析之floor() | 披着羊皮的狼</title>
-    
-    
-        <meta name="keywords" content="sql注入" />
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="环境：mysql 5.1.73 123[root@localhost ~]# mysql --versionmysql  Ver 14.14 Distrib 5.1.73, for redhat-linux-gnu (x86_64) using readline 5.1[root@localhost ~]#">
-<meta property="og:type" content="article">
-<meta property="og:title" content="mysql报错注入原理分析之floor()">
-<meta property="og:url" content="http://zzqsmile.top/2018/06/06/web%E5%AE%89%E5%85%A8/SQL%E6%B3%A8%E5%85%A5/mysql%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90%E4%B9%8Bfloor/index.html">
-<meta property="og:site_name" content="披着羊皮的狼">
-<meta property="og:description" content="环境：mysql 5.1.73 123[root@localhost ~]# mysql --versionmysql  Ver 14.14 Distrib 5.1.73, for redhat-linux-gnu (x86_64) using readline 5.1[root@localhost ~]#">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://qiniuyun.zzqsmile.top/blog/180606/8FLfC65IdE.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim">
-<meta property="og:image" content="http://qiniuyun.zzqsmile.top/blog/180606/DDG7LF0AeA.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim">
-<meta property="og:image" content="http://qiniuyun.zzqsmile.top/blog/180606/ab6H4jbB9K.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim">
-<meta property="og:image" content="http://qiniuyun.zzqsmile.top/blog/180606/DgKh62gBad.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim">
-<meta property="og:image" content="http://qiniuyun.zzqsmile.top/blog/180606/311923mgkd.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim">
-<meta property="og:image" content="http://qiniuyun.zzqsmile.top/blog/180606/0ick80KBje.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim">
-<meta property="og:image" content="http://qiniuyun.zzqsmile.top/blog/180606/AgedDIb4Il.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim">
-<meta property="og:image" content="http://qiniuyun.zzqsmile.top/blog/180606/9glH9F28bH.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim">
-<meta property="og:image" content="http://qiniuyun.zzqsmile.top/blog/180606/DBD02DAI1e.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim">
-<meta property="og:image" content="http://qiniuyun.zzqsmile.top/blog/180606/4KL72C70Ak.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim">
-<meta property="og:image" content="http://qiniuyun.zzqsmile.top/blog/180606/F911FFgEBm.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim">
-<meta property="og:image" content="http://qiniuyun.zzqsmile.top/blog/180606/lDEjA0Ehl5.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim">
-<meta property="og:image" content="http://qiniuyun.zzqsmile.top/blog/180606/dc2D1d9jKI.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim">
-<meta property="og:image" content="http://qiniuyun.zzqsmile.top/blog/180606/cA5lgG2K8L.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim">
-<meta property="og:image" content="http://qiniuyun.zzqsmile.top/blog/180606/a82gFB89db.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim">
-<meta property="og:image" content="http://qiniuyun.zzqsmile.top/blog/180606/A7hjLLb3J9.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim">
-<meta property="og:image" content="http://qiniuyun.zzqsmile.top/blog/180606/6KjEeKdAlg.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim">
-<meta property="og:image" content="http://qiniuyun.zzqsmile.top/blog/180606/a98kBEDG0f.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim">
-<meta property="article:published_time" content="2018-06-06T01:00:00.000Z">
-<meta property="article:modified_time" content="2020-10-18T07:59:46.414Z">
-<meta property="article:author" content="John Doe">
-<meta property="article:tag" content="sql注入">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://qiniuyun.zzqsmile.top/blog/180606/8FLfC65IdE.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim">
-    
-
-    
-        <link rel="alternate" href="/atom.xml" title="披着羊皮的狼" type="application/atom+xml" />
-    
-
-    
-        <link rel="icon" href="/favicon.ico" />
-    
-
-    
-<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
-
-    
-<link rel="stylesheet" href="/libs/open-sans/styles.css">
-
-    
-<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
-
-
-    
-<link rel="stylesheet" href="/css/style.css">
-
-    
-<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
-
-    
-<script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
-
-    
-    
-        
-<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
-
-    
-    
-        
-<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
-
-    
-    
-    
-    
-
-
-    
-        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    
-<meta name="generator" content="Hexo 5.0.2"></head>
-
-<body>
-    <div id="container">
-        <header id="header">
-    <div id="header-main" class="header-inner">
-        <div class="outer">
-            <a href="/" id="logo">
-                <i class="logo"></i>
-                <span class="site-title">披着羊皮的狼</span>
-            </a>
-            <nav id="main-nav">
-                
-                    <a class="main-nav-link" href="/">首页</a>
-                
-                    <a class="main-nav-link" href="/archives">归档</a>
-                
-                    <a class="main-nav-link" href="/categories">分类</a>
-                
-                    <a class="main-nav-link" href="/tags">标签</a>
-                
-                    <a class="main-nav-link" href="/about">关于</a>
-                
-            </nav>
-            
-            <div id="search-form-wrap">
-
-    <form class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
-        <button type="submit" class="search-form-submit"></button>
-    </form>
-    <div class="ins-search">
-    <div class="ins-search-mask"></div>
-    <div class="ins-search-container">
-        <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="Type something..." />
-            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-        </div>
-        <div class="ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
-    </div>
-</div>
-<script>
-(function (window) {
-    var INSIGHT_CONFIG = {
-        TRANSLATION: {
-            POSTS: 'Posts',
-            PAGES: 'Pages',
-            CATEGORIES: 'Categories',
-            TAGS: 'Tags',
-            UNTITLED: '(Untitled)',
-        },
-        ROOT_URL: '/',
-        CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-})(window);
-</script>
-
-<script src="/js/insight.js"></script>
-
-
-</div>
-        </div>
-    </div>
-    <div id="main-nav-mobile" class="header-sub header-inner">
-        <table class="menu outer">
-            <tr>
-                
-                    <td><a class="main-nav-link" href="/">首页</a></td>
-                
-                    <td><a class="main-nav-link" href="/archives">归档</a></td>
-                
-                    <td><a class="main-nav-link" href="/categories">分类</a></td>
-                
-                    <td><a class="main-nav-link" href="/tags">标签</a></td>
-                
-                    <td><a class="main-nav-link" href="/about">关于</a></td>
-                
-                <td>
-                    
-    <div class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
-    </div>
-
-                </td>
-            </tr>
-        </table>
-    </div>
-</header>
-
-        <div class="outer">
-            
-            
-                <aside id="sidebar">
-   
-        
-    <div class="widget-wrap" id='categories'>
-        <h3 class="widget-title">
-            <span>categories</span>
-            &nbsp;
-            <a id='allExpand' href="#">
-                <i class="fa fa-angle-double-down fa-2x"></i>
-            </a>
-        </h3>
-        
-        
-        
-         <ul class="unstyled" id="tree" > 
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            CTF
-                        </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/05/01/CTF/iscc-2018-web-001/">CTF-2018-Web-比较数字大小</a></li>  <li class="file"><a href="/2018/05/02/CTF/iscc-2018-web-002/">CTF-Web-2018-SQL注入的艺术</a></li>  <li class="file"><a href="/2018/09/25/CTF/XJNU-CTF_2018/">XJNU-CTF 2018</a></li>  <li class="file"><a href="/2018/10/31/CTF/CTF%E5%85%A5%E9%97%A8%E7%AF%87writeup_D0g3Games/">CTF入门篇writeup——D0g3 Games</a></li>  <li class="file"><a href="/2019/04/18/CTF/DDCTF_2019_%E9%83%A8%E5%88%86WEB%E9%A2%98%E8%A7%A3/">DDCTF2019部分web题Write Up</a></li>  </ul> 
-                    </li> 
-                    
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            Database
-                        </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/02/01/Database/2018-02-01-mysql-information_schema/">MySQL数据库information_schema常用表结构</a></li>  <li class="file"><a href="/2018/02/02/Database/2018-02-02-mysql%E5%AF%86%E7%A0%81%E6%89%BE%E5%9B%9E/">Linux下MYSQL忘记密码怎么办？</a></li>  <li class="file"><a href="/2019/03/27/Database/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95/">MySQL数据库安全测试</a></li>  </ul> 
-                    </li> 
-                    
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            Linux
-                        </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/01/01/Linux/2018-01-01-kali_ssh%E7%99%BB%E5%BD%95%E9%97%AE%E9%A2%98/">Linux_kali操作系统SSH问题解决方案</a></li>  <li class="file"><a href="/2018/01/02/Linux/2018-01-02-linux-vim/">Linux命令之Vim</a></li>  <li class="file"><a href="/2018/01/03/Linux/2018-01-03-linux-awk/">Linux 命令之awk</a></li>  <li class="file"><a href="/2018/01/04/Linux/2018-01-04-linux-grep/">Linux 命令之grep</a></li>  <li class="file"><a href="/2018/01/05/Linux/2018-01-05-linux-xshell%E5%AF%86%E9%92%A5%E7%99%BB%E5%BD%95/">Linux之Xshell密钥登录</a></li>  <li class="file"><a href="/2018/01/06/Linux/2018-01-06-linux-tar/">Linux命令之tar</a></li>  <li class="file"><a href="/2018/01/07/Linux/2018-01-07-vmware/">VMware Workstation 网络连接问题</a></li>  <li class="file"><a href="/2018/01/08/Linux/2018-01-08-Nginx%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85/">CentOS 软件安装之Nginx源码安装</a></li>  <li class="file"><a href="/2018/09/05/Linux/2018-09-05-Linux%E4%B8%8B%E5%8F%8D%E5%BC%B9shell%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">Linux下反弹shell几种方法学习总结</a></li>  </ul> 
-                    </li> 
-                    
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            Server
-                        </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/03/03/Server/2018-03-03-Ubuntu-LAMP/">Ubuntu server LAMP环境搭建</a></li>  <li class="file"><a href="/2018/03/04/Server/2018-03-04-Ubuntu-apt-get%E6%BA%90%E9%85%8D%E7%BD%AE/">Ubuntu Server 14.04配置apt-get源</a></li>  <li class="file"><a href="/2018/03/05/Server/2018-03-05-Ubuntu-wordpress/">Ubuntu LAMP环境下搭建wordpress</a></li>  <li class="file"><a href="/2018/03/06/Server/2018-03-06-DNS%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">DNS server 安装配置</a></li>  <li class="file"><a href="/2018/03/07/Server/2018-03-07-DNS%E5%9F%9F%E9%97%B4%E4%BC%A0%E9%80%81/">DNS 域间传送</a></li>  <li class="file"><a href="/2018/03/08/Server/2018-03-08-LAMP%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%E5%9F%BA%E4%BA%8EIP/">LAMP环境下虚拟主机配置(基于IP)</a></li>  <li class="file"><a href="/2018/03/09/Server/2018-03-09-LAMP%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%E5%9F%BA%E4%BA%8E%E5%9F%9F%E5%90%8D/">LAMP环境下虚拟主机配置(基于域名)</a></li>  <li class="file"><a href="/2018/03/10/Server/2018-03-10-LAMP%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%E5%9F%BA%E4%BA%8E%E7%AB%AF%E5%8F%A3/">LAMP环境下虚拟主机配置(基于端口)</a></li>  <li class="file"><a href="/2018/03/11/Server/2018-03-11-apache%E6%9C%8D%E5%8A%A1%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/">apache服务安全配置</a></li>  </ul> 
-                    </li> 
-                    
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            python3
-                        </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/06/02/python3/2018-06-03-python%E7%BB%83%E4%B9%A0%E7%A8%8B%E5%BA%8F/">python练习小程序</a></li>  <li class="file"><a href="/2018/06/03/python3/2018-06-03-python-%E4%BA%8C%E5%88%86%E6%B3%95%E5%8E%9F%E7%90%86/">python二分法小程序原理研究</a></li>  <li class="file"><a href="/2018/06/04/python3/2018-06-04-%E5%B8%83%E5%B0%94%E7%9B%B2%E6%B3%A8/">python脚本实现半自动化布尔盲注</a></li>  <li class="file"><a href="/2018/06/05/python3/2018-06-05-%E6%8A%A5%E9%94%99/">python脚本实现半自动化报错注入</a></li>  <li class="file"><a href="/2019/09/13/python3/%E5%A7%93%E5%90%8D%E6%B1%89%E5%AD%97%E8%BD%AC%E6%8B%BC%E9%9F%B3/">实现姓名汉字转成拼音</a></li>  </ul> 
-                    </li> 
-                    
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            tools
-                        </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2017/12/01/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2017-12-01-kali-arpspoof/">使用kali-arpspoof工具进行中间人arp投毒</a></li>  <li class="file"><a href="/2017/12/02/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2017-12-02-kali-wifi%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3%E6%95%99%E7%A8%8B/">kali下wifi破解密码教程</a></li>  <li class="file"><a href="/2017/12/03/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2017-12-03-wireshark/">wireshark抓包过滤规则</a></li>  <li class="file"><a href="/2017/12/04/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2017-12-04-nessus%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/">nessus安装教程</a></li>  <li class="file"><a href="/2017/12/05/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2017-12-05-sublime%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/">Sublime安装汉化教程</a></li>  <li class="file"><a href="/2018/06/04/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/2018-06-04-burp%E5%AE%89%E8%A3%85sqlmap%E6%A8%A1%E5%9D%97/">burpsuite安装sqlmap模块---神器合一</a></li>  <li class="file"><a href="/2018/06/05/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/burpsuite%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97/">burpsuite使用教程</a></li>  <li class="file"><a href="/2019/04/06/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/sqlmap/">sqlmap使用指南</a></li>  <li class="file"><a href="/2019/08/20/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/msf/">msf安装使用教程</a></li>  </ul> 
-                    </li> 
-                    
-                    <li class="directory open">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder-open"></i>
-                            &nbsp;
-                            web安全
-                        </a>
-                         <ul class="unstyled" id="tree" > 
-                    <li class="directory open">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder-open"></i>
-                            &nbsp;
-                            SQL注入
-                        </a>
-                         <ul class="unstyled" id="tree" > 
-                    <li class="directory open">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder-open"></i>
-                            &nbsp;
-                            MYSQL
-                        </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/04/01/web%E5%AE%89%E5%85%A8/SQL%E6%B3%A8%E5%85%A5/sqli-labs-Less1/">sqli-labs Less-1</a></li>  <li class="file active"><a href="/2018/06/06/web%E5%AE%89%E5%85%A8/SQL%E6%B3%A8%E5%85%A5/mysql%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90%E4%B9%8Bfloor/">mysql报错注入原理分析之floor()</a></li>  <li class="file"><a href="/2018/06/18/web%E5%AE%89%E5%85%A8/SQL%E6%B3%A8%E5%85%A5/sql%E7%9B%B2%E6%B3%A8%E5%A5%87%E6%B7%AB%E6%8A%80%E5%B7%A7%E4%B9%8Bdnslog/">SQL注入奇淫技巧——利用dnslog获取看不到的信息</a></li>  <li class="file"><a href="/2018/11/12/web%E5%AE%89%E5%85%A8/SQL%E6%B3%A8%E5%85%A5/Order_by%E6%8E%92%E5%BA%8F%E6%B3%A8%E5%85%A5%E6%96%B9%E6%B3%95%E5%B0%8F%E6%80%BB%E7%BB%93/">Order by排序注入方法小总结</a></li>  </ul> 
-                    </li> 
-                     </ul> 
-                    </li> 
-                    
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            XSS
-                        </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2020/10/18/web%E5%AE%89%E5%85%A8/XSS/XSS%20Bypass/">XSS Bypass</a></li>  <li class="file"><a href="/2020/10/18/web%E5%AE%89%E5%85%A8/XSS/XSS%20Payload/">XSS Payload</a></li>  </ul> 
-                    </li> 
-                    
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            XXE
-                        </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2019/08/19/web%E5%AE%89%E5%85%A8/XXE/XXE/">XXE漏洞笔记</a></li>  </ul> 
-                    </li> 
-                    
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            文件上传/解析
-                        </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/06/06/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/">文件上传解析漏洞总结</a></li>  </ul> 
-                    </li> 
-                     <li class="file"><a href="/2019/04/04/%E4%BC%A0%E9%80%81%E9%97%A8/CORS/">跨域资源共享CORS</a></li>  </ul> 
-                    </li> 
-                    
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            信息收集
-                        </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2020/10/15/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/whois%E4%BF%A1%E6%81%AF%E6%9F%A5%E8%AF%A2/">whois信息查询</a></li>  <li class="file"><a href="/2020/10/15/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%AD%90%E5%9F%9F%E5%90%8D%E6%94%B6%E9%9B%86/">子域名收集</a></li>  <li class="file"><a href="/2020/10/15/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%A4%87%E6%A1%88%E4%BF%A1%E6%81%AF%E6%9F%A5%E8%AF%A2/">备案信息查询</a></li>  <li class="file"><a href="/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%AF%BB%E6%89%BE%E7%9C%9F%E5%AE%9EIP/">寻找真实IP</a></li>  <li class="file"><a href="/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/">指纹识别</a></li>  <li class="file"><a href="/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E6%97%81%E7%AB%99%E5%92%8CC%E6%AE%B5/">旁站和C段</a></li>  <li class="file"><a href="/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E7%9B%AE%E5%BD%95%E6%89%AB%E6%8F%8F/">目录扫描</a></li>  <li class="file"><a href="/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/">端口扫描</a></li>  <li class="file"><a href="/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%8F%82%E8%80%83/">参考</a></li>  </ul> 
-                    </li> 
-                    
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            其他
-                        </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/10/08/%E5%85%B6%E4%BB%96/%E4%BC%98%E7%A7%80%E5%8D%9A%E5%AE%A2%E9%93%BE%E6%8E%A5%E6%94%B6%E8%97%8F/">优秀博客文章笔记</a></li>  </ul> 
-                    </li> 
-                    
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            工具
-                        </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2019/08/21/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/Koadic%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B%E7%AC%94%E8%AE%B0/">Koadic使用教程笔记</a></li>  <li class="file"><a href="/2019/08/25/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/%E5%B7%A5%E5%85%B7%E5%AF%BC%E8%88%AA/">工具导航</a></li>  </ul> 
-                    </li> 
-                    
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            收藏文章
-                        </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2019/06/06/web%E5%AE%89%E5%85%A8/%E4%BC%98%E7%A7%80%E6%96%87%E7%AB%A0%E6%B1%87%E6%80%BB/">优秀文章汇总</a></li>  </ul> 
-                    </li> 
-                    
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            权限提升
-                        </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2019/02/19/%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/ubuntu%E6%9C%AC%E5%9C%B0%E6%8F%90%E6%9D%83%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0(CVE-2019-7304)/">ubuntu本地提权漏洞复现(CVE-2019-7304)</a></li>  </ul> 
-                    </li> 
-                    
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            测试笔记
-                        </a>
-                         <ul class="unstyled" id="tree" > 
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            SQL注入
-                        </a>
-                         <ul class="unstyled" id="tree" > 
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            MYSQL
-                        </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2020/10/28/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL_union%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2/">MySQL_union联合查询</a></li>  <li class="file"><a href="/2020/10/28/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/">MySQL数据库基本知识学习</a></li>  <li class="file"><a href="/2020/10/28/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL_%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/">MySQL_报错注入</a></li>  <li class="file"><a href="/2020/11/03/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL_%E5%B8%83%E5%B0%94%E6%B3%A8%E5%85%A5/">MySQL_布尔注入</a></li>  <li class="file"><a href="/2020/11/03/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL_%E5%BB%B6%E6%97%B6%E6%B3%A8%E5%85%A5/">MySQL_延时注入</a></li>  </ul> 
-                    </li> 
-                     </ul> 
-                    </li> 
-                     </ul> 
-                    </li> 
-                    
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            渗透测试
-                        </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/09/27/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/">信息收集笔记</a></li>  <li class="file"><a href="/2019/08/25/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试流程导航</a></li>  </ul> 
-                    </li> 
-                    
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            编码
-                        </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2019/03/29/%E4%BC%A0%E9%80%81%E9%97%A8/%E7%BC%96%E7%A0%81/">CTF必备技能之编码大全</a></li>  </ul> 
-                    </li> 
-                    
-                    <li class="directory">
-                        <a href="#" data-role="directory">
-                            <i class="fa fa-folder"></i>
-                            &nbsp;
-                            运维安全
-                        </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2018/10/03/%E8%BF%90%E7%BB%B4%E5%AE%89%E5%85%A8/Linux_CentOS%E6%9F%A5%E7%9C%8B%E7%A1%AC%E4%BB%B6%E4%BF%A1%E6%81%AF%E5%A4%A7%E5%85%A8/">Linux CentOS查看硬件信息大全</a></li>  </ul> 
-                    </li> 
-                     <li class="file"><a href="/2020/08/19/hello-world/">Hello World</a></li>  </ul> 
-    </div>
-    <script>
-        $(document).ready(function() {
-            var iconFolderOpenClass  = 'fa-folder-open';
-            var iconFolderCloseClass = 'fa-folder';
-            var iconAllExpandClass = 'fa-angle-double-down';
-            var iconAllPackClass = 'fa-angle-double-up';
-            // Handle directory-tree expansion:
-            // 左键单独展开目录
-            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
-                event.preventDefault();
-
-                var icon = $(this).children('.fa');
-                var expanded = icon.hasClass(iconFolderOpenClass);
-                var subtree = $(this).siblings('ul');
-                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
-                if (expanded) {
-                    if (typeof subtree != 'undefined') {
-                        subtree.slideUp({ duration: 100 });
-                    }
-                    icon.addClass(iconFolderCloseClass);
-                } else {
-                    if (typeof subtree != 'undefined') {
-                        subtree.slideDown({ duration: 100 });
-                    }
-                    icon.addClass(iconFolderOpenClass);
-                }
-            });
-            // 右键展开下属所有目录
-            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
-                event.preventDefault();
-                
-                var icon = $(this).children('.fa');
-                var expanded = icon.hasClass(iconFolderOpenClass);
-                var listNode = $(this).siblings('ul');
-                var subtrees = $.merge(listNode.find('li ul'), listNode);
-                var icons = $.merge(listNode.find('.fa'), icon);
-                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
-                if(expanded) {
-                    subtrees.slideUp({ duration: 100 });
-                    icons.addClass(iconFolderCloseClass);
-                } else {
-                    subtrees.slideDown({ duration: 100 });
-                    icons.addClass(iconFolderOpenClass);
-                }
-            })
-            // 展开关闭所有目录按钮
-            $(document).on('click', '#allExpand', function (event) {
-                event.preventDefault();
-                
-                var icon = $(this).children('.fa');
-                var expanded = icon.hasClass(iconAllExpandClass);
-                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
-                if(expanded) {
-                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
-                    $('#categories li ul').slideDown({ duration: 100 });
-                    icon.addClass(iconAllPackClass);
-                } else {
-                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
-                    $('#categories li ul').slideUp({ duration: 100 });
-                    icon.addClass(iconAllExpandClass);
-                }
-            });  
-        });
-    </script>
-
-    
-    <div id="toTop" class="fa fa-angle-up"></div>
-</aside>
-            
-            <section id="main"><article id="post-web安全/SQL注入/mysql报错注入原理分析之floor" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/web%E5%AE%89%E5%85%A8/">web安全</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/web%E5%AE%89%E5%85%A8/SQL%E6%B3%A8%E5%85%A5/">SQL注入</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/web%E5%AE%89%E5%85%A8/SQL%E6%B3%A8%E5%85%A5/MYSQL/">MYSQL</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a>
-    </div>
-
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/06/06/web%E5%AE%89%E5%85%A8/SQL%E6%B3%A8%E5%85%A5/mysql%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90%E4%B9%8Bfloor/">
-            <time datetime="2018-06-06T01:00:00.000Z" itemprop="datePublished">2018-06-06</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a target="_blank" rel="noopener" href='https://github.com/zzqsmile/Wiki-site/raw/writing/source/_posts/web安全/SQL注入/mysql报错注入原理分析之floor.md'> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a target="_blank" rel="noopener" href='https://github.com/zzqsmile/Wiki-site/edit/writing/source/_posts/web安全/SQL注入/mysql报错注入原理分析之floor.md'> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a target="_blank" rel="noopener" href='https://github.com/zzqsmile/Wiki-site/commits/writing/source/_posts/web安全/SQL注入/mysql报错注入原理分析之floor.md'> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 class="article-title" itemprop="name">
-            mysql报错注入原理分析之floor()
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-        
-        
-            <p><em>环境：mysql 5.1.73</em></p>
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="菜鸟blog"><title>mysql报错注入原理分析之floor() | dnsl0g's blog</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/clipboard/dist/clipboard.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.js"></script><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.css"><meta name="generator" content="Hexo 5.0.2"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">mysql报错注入原理分析之floor()</h1><a id="logo" href="/.">dnsl0g's blog</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">mysql报错注入原理分析之floor()</h1><div class="post-meta">2018-06-06<span> | </span><span class="category"><a href="/categories/web%E5%AE%89%E5%85%A8/">web安全</a><a href="/categories/web%E5%AE%89%E5%85%A8/SQL%E6%B3%A8%E5%85%A5/">SQL注入</a><a href="/categories/web%E5%AE%89%E5%85%A8/SQL%E6%B3%A8%E5%85%A5/MYSQL/">MYSQL</a></span></div><div class="post-content"><p><em>环境：mysql 5.1.73</em></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# mysql --version</span><br><span class="line">mysql  Ver 14.14 Distrib 5.1.73, for redhat-linux-gnu (x86_64) using readline 5.1</span><br><span class="line">[root@localhost ~]#</span><br></pre></td></tr></table></figure>
 
 <a id="more"></a>
@@ -549,10 +11,10 @@
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select floor(0.3);</span><br><span class="line">+------------+</span><br><span class="line">| floor(0.3) |</span><br><span class="line">+------------+</span><br><span class="line">|          0 |</span><br><span class="line">+------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select floor(0.5);</span><br><span class="line">+------------+</span><br><span class="line">| floor(0.5) |</span><br><span class="line">+------------+</span><br><span class="line">|          0 |</span><br><span class="line">+------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select floor(0.8);</span><br><span class="line">+------------+</span><br><span class="line">| floor(0.8) |</span><br><span class="line">+------------+</span><br><span class="line">|          0 |</span><br><span class="line">+------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><img src="http://qiniuyun.zzqsmile.top/blog/180606/8FLfC65IdE.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
+<p><img src="http://qiniuyun.dnsl0ge.top/blog/180606/8FLfC65IdE.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select floor(1.8);</span><br><span class="line">+------------+</span><br><span class="line">| floor(1.8) |</span><br><span class="line">+------------+</span><br><span class="line">|          1 |</span><br><span class="line">+------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select floor(1.5);</span><br><span class="line">+------------+</span><br><span class="line">| floor(1.5) |</span><br><span class="line">+------------+</span><br><span class="line">|          1 |</span><br><span class="line">+------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select floor(1.3);</span><br><span class="line">+------------+</span><br><span class="line">| floor(1.3) |</span><br><span class="line">+------------+</span><br><span class="line">|          1 |</span><br><span class="line">+------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><img src="http://qiniuyun.zzqsmile.top/blog/180606/DDG7LF0AeA.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
+<p><img src="http://qiniuyun.dnsl0ge.top/blog/180606/DDG7LF0AeA.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
 <blockquote>
 <p>事实证明上面说的没毛病</p>
 </blockquote>
@@ -567,42 +29,42 @@
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; CREATE TABLE IF NOT EXISTS &#96;test&#96;(</span><br><span class="line">    -&gt;    &#96;id&#96; INT AUTO_INCREMENT PRIMARY KEY,</span><br><span class="line">    -&gt;    &#96;name&#96; VARCHAR(100) NOT NULL,</span><br><span class="line">    -&gt;    &#96;number&#96; INT NOT NULL,</span><br><span class="line">    -&gt;    &#96;content&#96; VARCHAR(100)</span><br><span class="line">    -&gt; )ENGINE&#x3D;InnoDB DEFAULT CHARSET&#x3D;utf8;</span><br><span class="line">Query OK, 0 rows affected (0.07 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; </span><br></pre></td></tr></table></figure>
 
-<p><img src="http://qiniuyun.zzqsmile.top/blog/180606/ab6H4jbB9K.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
+<p><img src="http://qiniuyun.dnsl0ge.top/blog/180606/ab6H4jbB9K.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
 <ul>
 <li>然后在test表中插入一些数据</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; insert into test</span><br><span class="line">    -&gt; (name,number,content)</span><br><span class="line">    -&gt; values</span><br><span class="line">    -&gt; (&#39;aa&#39;,2,&#39;11&#39;),</span><br><span class="line">    -&gt; (&#39;aa&#39;,3,&#39;22&#39;),</span><br><span class="line">    -&gt; (&#39;bb&#39;,4,&#39;33&#39;),</span><br><span class="line">    -&gt; (&#39;bb&#39;,5,&#39;44&#39;),</span><br><span class="line">    -&gt; (&#39;bb&#39;,5,&#39;55&#39;),</span><br><span class="line">    -&gt; (&#39;cc&#39;,6,&#39;66&#39;),</span><br><span class="line">    -&gt; (&#39;cc&#39;,6,&#39;77&#39;),</span><br><span class="line">    -&gt; (&#39;dd&#39;,2,&#39;88&#39;),</span><br><span class="line">    -&gt; (&#39;ee&#39;,2,&#39;99&#39;);</span><br><span class="line">Query OK, 9 rows affected (0.00 sec)</span><br><span class="line">Records: 9  Duplicates: 0  Warnings: 0</span><br><span class="line"></span><br><span class="line">mysql&gt; </span><br></pre></td></tr></table></figure>
 
-<p><img src="http://qiniuyun.zzqsmile.top/blog/180606/DgKh62gBad.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
+<p><img src="http://qiniuyun.dnsl0ge.top/blog/180606/DgKh62gBad.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from test;</span><br></pre></td></tr></table></figure>
 
-<p><img src="http://qiniuyun.zzqsmile.top/blog/180606/311923mgkd.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
+<p><img src="http://qiniuyun.dnsl0ge.top/blog/180606/311923mgkd.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
 <ul>
 <li>接下来进行我们的探索</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from test group by name;</span><br></pre></td></tr></table></figure>
 
-<p><img src="http://qiniuyun.zzqsmile.top/blog/180606/0ick80KBje.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
+<p><img src="http://qiniuyun.dnsl0ge.top/blog/180606/0ick80KBje.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
 <blockquote>
 <p>通过比较，可以看出通过<code>group by</code>将字段<code>name</code>相同的进行分组查询，注意这个地方不要看其他内容，单纯理解一下这个分组的意思</p>
 </blockquote>
 <ul>
 <li>然后我们接着来看，上面不是说了分组的含义吗？其实数据库在执行<code>group by</code>时候创建了一张虚拟的表，是知道<code>name</code>这个字段相同的有几条结果的，如下图测试说明：</li>
 </ul>
-<p><img src="http://qiniuyun.zzqsmile.top/blog/180606/AgedDIb4Il.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
+<p><img src="http://qiniuyun.dnsl0ge.top/blog/180606/AgedDIb4Il.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
 <ol start="3">
 <li><strong>rand()</strong></li>
 </ol>
 <ul>
 <li>在mysql里面rand()函数是随机产生一个范围(0,1)的随机数**</li>
 </ul>
-<p><img src="http://qiniuyun.zzqsmile.top/blog/180606/9glH9F28bH.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
+<p><img src="http://qiniuyun.dnsl0ge.top/blog/180606/9glH9F28bH.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
 <ul>
 <li>那么有人也许有疑问，随机产生的值有规律吗？为了验证猜想，下面找一个数据量比较大的表<code>information_schema.tables</code>测试一下，这里我只取30条数据实验</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select rand() from information_schema.tables limit 0,30;</span><br></pre></td></tr></table></figure>
 
-<p><img src="http://qiniuyun.zzqsmile.top/blog/180606/DBD02DAI1e.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
+<p><img src="http://qiniuyun.dnsl0ge.top/blog/180606/DBD02DAI1e.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
 <blockquote>
 <p>首先可以查看到每一条都是随机产生的浮点型值，而且这条sql语句经过多次执行发现，每一次执行结果也是随机的，由此可以得出此时rand()是真随机.</p>
 </blockquote>
@@ -611,13 +73,13 @@
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select floor(rand()) from information_schema.tables limit 0,30;</span><br></pre></td></tr></table></figure>
 
-<p><img src="http://qiniuyun.zzqsmile.top/blog/180606/4KL72C70Ak.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
+<p><img src="http://qiniuyun.dnsl0ge.top/blog/180606/4KL72C70Ak.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
 <blockquote>
 <p>这样看是不是就这清晰直观明了，但是有人又有疑问了吧，为什么都是0呢，不是随机的吗，别忘了我们<code>rand()</code>随机范围(0,1)，也就是随机出来的都是小于1的小数，然后<code>floor()</code>取整后可不都是0吗，这样看着方便了，但是却看不到随机性了，那好我们想个办法继续往下看。</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select floor(rand()*2) from information_schema.tables limit 0,30;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><img src="http://qiniuyun.zzqsmile.top/blog/180606/F911FFgEBm.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
+<p><img src="http://qiniuyun.dnsl0ge.top/blog/180606/F911FFgEBm.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
 <blockquote>
 <p>这步看着应该不难理解吧，就是将随机范围(0,1)扩大2倍变成(0,2),这样随机值是不是有0点多的、1点多的,然后取整就可以清晰简单的研究其规律。经过多次执行这条语句发现：是没有规律的。这和之前没取整说的真随机是一样的。</p>
 </blockquote>
@@ -626,7 +88,7 @@
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select floor(rand(0)*2) from information_schema.tables limit 0,30;</span><br></pre></td></tr></table></figure>
 
-<p><img src="http://qiniuyun.zzqsmile.top/blog/180606/lDEjA0Ehl5.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
+<p><img src="http://qiniuyun.dnsl0ge.top/blog/180606/lDEjA0Ehl5.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
 <blockquote>
 <p>经过多次执行这条语句，你会发现这是一个规律，每次随机结果和这个一模一样</p>
 </blockquote>
@@ -635,18 +97,18 @@
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select count(*) from test.test group by floor(rand(0)*2);</span><br></pre></td></tr></table></figure>
 
-<p><img src="http://qiniuyun.zzqsmile.top/blog/180606/dc2D1d9jKI.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
+<p><img src="http://qiniuyun.dnsl0ge.top/blog/180606/dc2D1d9jKI.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
 <blockquote>
 <p>可以看到报错显示位<code>&#39;1&#39;</code>，这个错误就是由于主键不能重复而暴出的错误</p>
 </blockquote>
 <ul>
 <li>接下来一步一步分析一下这个过程<br>(1).首先查询之前会默认建立一张空的虚拟表，如下图所示：</li>
 </ul>
-<p><img src="http://qiniuyun.zzqsmile.top/blog/180606/cA5lgG2K8L.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
+<p><img src="http://qiniuyun.dnsl0ge.top/blog/180606/cA5lgG2K8L.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
 <p>(2).取第一条记录，执行<code>floor(rand(0)*2)</code>，发现结果为0(第一次计算),查询虚拟表，发现0的键值不存在，则<code>floor(rand(0)*2)</code>会被再计算一次，结果为1(第二次计算)，插入虚表，这时第一条记录查询完毕，如下图:</p>
-<p><img src="http://qiniuyun.zzqsmile.top/blog/180606/a82gFB89db.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
+<p><img src="http://qiniuyun.dnsl0ge.top/blog/180606/a82gFB89db.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
 <p>(3).查询第二条记录，再次计算<code>floor(rand(0)*2)</code>，发现结果为1(第三次计算)，查询虚表，发现1的键值存在，所以<code>floor(rand(0)*2)</code>不会被计算第二次，直接<code>count(*)</code>加1，第二条记录查询完毕，结果如下:</p>
-<p><img src="http://qiniuyun.zzqsmile.top/blog/180606/A7hjLLb3J9.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
+<p><img src="http://qiniuyun.dnsl0ge.top/blog/180606/A7hjLLb3J9.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
 <p>(4).查询第三条记录，再次计算<code>floor(rand(0)*2)</code>，发现结果为0(第4次计算)，查询虚表，发现键值没有0，则数据库尝试插入一条新的数据，在插入数据时<code>floor(rand(0)*2)</code>被再次计算，作为虚表的主键，其值为1(第5次计算)，然而1这个主键已经存在于虚拟表中，而新计算的值也为1(主键键值必须唯一)，所以插入的时候就直接报错了。</p>
 <p>(5).整个查询过程<code>floor(rand(0)*2)</code>被计算了5次，这也是开始说让记住前5个值（01101）的原因，查询原数据表3次，所以这就是为什么数据表中需要3条数据，使用该语句才会报错的原因。</p>
 <p>注意：再次强调，此手法满足条件，需要数据表里面数据为3条以上才可以！</p>
@@ -655,143 +117,14 @@
 
 </li>
 </ul>
-<p><img src="http://qiniuyun.zzqsmile.top/blog/180606/6KjEeKdAlg.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
+<p><img src="http://qiniuyun.dnsl0ge.top/blog/180606/6KjEeKdAlg.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
 <ul>
 <li>然后试试暴库</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select count(*) from test.test group by concat((floor(rand(0)*2)),&quot;~&quot;,(select schema_name from information_schema.schemata limit 0,1));</span><br><span class="line">ERROR 1062 (23000): Duplicate entry &#39;1~information_schema&#39; for key &#39;group_key&#39;</span><br><span class="line">mysql&gt; select count(*) from test.test group by concat((floor(rand(0)*2)),&quot;~&quot;,(select schema_name from information_schema.schemata limit 1,1));</span><br><span class="line">ERROR 1062 (23000): Duplicate entry &#39;1~aaa&#39; for key &#39;group_key&#39;</span><br><span class="line">mysql&gt; select count(*) from test.test group by concat((floor(rand(0)*2)),&quot;~&quot;,(select schema_name from information_schema.schemata limit 2,1));</span><br><span class="line">ERROR 1062 (23000): Duplicate entry &#39;1~bbb&#39; for key &#39;group_key&#39;</span><br><span class="line">mysql&gt; select count(*) from test.test group by concat((floor(rand(0)*2)),&quot;~&quot;,(select schema_name from information_schema.schemata limit 3,1));</span><br><span class="line">ERROR 1062 (23000): Duplicate entry &#39;1~challenges&#39; for key &#39;group_key&#39;</span><br><span class="line">mysql&gt; </span><br></pre></td></tr></table></figure>
 
-<p><img src="http://qiniuyun.zzqsmile.top/blog/180606/a98kBEDG0f.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
+<p><img src="http://qiniuyun.dnsl0ge.top/blog/180606/a98kBEDG0f.bmp?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
 <ul>
 <li>ok没毛病，就是这样利用的往下就不再多说。</li>
 </ul>
-
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-    
-<nav id="article-nav">
-    
-        <a href="/2018/06/18/web%E5%AE%89%E5%85%A8/SQL%E6%B3%A8%E5%85%A5/sql%E7%9B%B2%E6%B3%A8%E5%A5%87%E6%B7%AB%E6%8A%80%E5%B7%A7%E4%B9%8Bdnslog/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">Newer</strong>
-            <div class="article-nav-title">
-                
-                    SQL注入奇淫技巧——利用dnslog获取看不到的信息
-                
-            </div>
-        </a>
-    
-    
-        <a href="/2018/06/06/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">Older</strong>
-            <div class="article-nav-title">文件上传解析漏洞总结</div>
-        </a>
-    
-</nav>
-
-
-
-
-
-    
-    
-
-
-
-
-<!-- baidu url auto push script -->
-<script type="text/javascript">
-    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
-</script>     
-</section>
-        </div>
-        <footer id="footer">
-    <div class="outer">
-        <div id="footer-info" class="inner">
-            John Doe &copy; 2020 
-            <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
-            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a target="_blank" rel="noopener" href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
-            
-                <br>
-                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
-                &nbsp;|&nbsp;
-                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
-            
-        </div>
-    </div>
-</footer>
-
-        
-
-    
-        
-<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
-
-        
-<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
-
-        
-<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
-
-        
-<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
-
-        
-<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
-
-        
-<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
-
-        
-<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
-
-        
-<script src="/libs/lightgallery/js/lg-share.min.js"></script>
-
-        
-<script src="/libs/lightgallery/js/lg-video.min.js"></script>
-
-    
-    
-        
-<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
-
-    
-    
-        <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true,
-            TeX: {
-                equationNumbers: {
-                  autoNumber: 'AMS'
-                }
-            }
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-
-
-
-<!-- Custom Scripts -->
-
-<script src="/js/main.js"></script>
-
-
-    </div>
-</body>
-</html>
+</div><div class="tags"><a href="/tags/sql%E6%B3%A8%E5%85%A5/"><i class="fa fa-tag"></i>sql注入</a></div><div class="post-nav"><a class="pre" href="/2018/06/18/web%E5%AE%89%E5%85%A8/SQL%E6%B3%A8%E5%85%A5/sql%E7%9B%B2%E6%B3%A8%E5%A5%87%E6%B7%AB%E6%8A%80%E5%B7%A7%E4%B9%8Bdnslog/">SQL注入奇淫技巧——利用dnslog获取看不到的信息</a><a class="next" href="/2018/06/06/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/">文件上传解析漏洞总结</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://dnsl0g.top"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CTF/">CTF</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/">Database</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Server/">Server</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python3/">python3</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/tools/">tools</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web%E5%AE%89%E5%85%A8/">web安全</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/web%E5%AE%89%E5%85%A8/SQL%E6%B3%A8%E5%85%A5/">SQL注入</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/web%E5%AE%89%E5%85%A8/SQL%E6%B3%A8%E5%85%A5/MYSQL/">MYSQL</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/web%E5%AE%89%E5%85%A8/XSS/">XSS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web%E5%AE%89%E5%85%A8/XXE/">XXE</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0-%E8%A7%A3%E6%9E%90/">文件上传/解析</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/">信息收集</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%94%B6%E8%97%8F%E6%96%87%E7%AB%A0/">收藏文章</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/">权限提升</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/">测试笔记</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5/">SQL注入</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5/MYSQL/">MYSQL</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A0%81/">编码</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BF%90%E7%BB%B4%E5%AE%89%E5%85%A8/">运维安全</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/CTF/" style="font-size: 15px;">CTF</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/linux%E4%B9%8B%E6%8A%80%E8%83%BD%E5%AD%A6%E4%B9%A0/" style="font-size: 15px;">linux之技能学习</a> <a href="/tags/linux%E4%B9%8B%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/" style="font-size: 15px;">linux之命令学习</a> <a href="/tags/VMware/" style="font-size: 15px;">VMware</a> <a href="/tags/%E5%8F%8D%E5%BC%B9shell/" style="font-size: 15px;">反弹shell</a> <a href="/tags/LAMP/" style="font-size: 15px;">LAMP</a> <a href="/tags/Ubuntu/" style="font-size: 15px;">Ubuntu</a> <a href="/tags/DNS/" style="font-size: 15px;">DNS</a> <a href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" style="font-size: 15px;">中间件</a> <a href="/tags/python3/" style="font-size: 15px;">python3</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 15px;">sql注入</a> <a href="/tags/%E5%B0%8F%E5%B7%A5%E5%85%B7/" style="font-size: 15px;">小工具</a> <a href="/tags/XXE/" style="font-size: 15px;">XXE</a> <a href="/tags/sqli-labs/" style="font-size: 15px;">sqli-labs</a> <a href="/tags/%E4%BC%A0%E9%80%81%E9%97%A8/" style="font-size: 15px;">传送门</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E/" style="font-size: 15px;">文件上传解析漏洞</a> <a href="/tags/%E5%85%B6%E4%BB%96/" style="font-size: 15px;">其他</a> <a href="/tags/kali/" style="font-size: 15px;">kali</a> <a href="/tags/wireshark/" style="font-size: 15px;">wireshark</a> <a href="/tags/%E6%89%AB%E6%8F%8F/" style="font-size: 15px;">扫描</a> <a href="/tags/sublime/" style="font-size: 15px;">sublime</a> <a href="/tags/burpsuite/" style="font-size: 15px;">burpsuite</a> <a href="/tags/Koadic/" style="font-size: 15px;">Koadic</a> <a href="/tags/msf/" style="font-size: 15px;">msf</a> <a href="/tags/sqlmap/" style="font-size: 15px;">sqlmap</a> <a href="/tags/%E6%8F%90%E6%9D%83/" style="font-size: 15px;">提权</a> <a href="/tags/%E8%BF%90%E7%BB%B4%E5%AE%89%E5%85%A8/" style="font-size: 15px;">运维安全</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" style="font-size: 15px;">信息收集</a> <a href="/tags/XSS/" style="font-size: 15px;">XSS</a> <a href="/tags/%E6%89%8B%E5%86%8C/" style="font-size: 15px;">手册</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/11/03/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL_%E5%B8%83%E5%B0%94%E6%B3%A8%E5%85%A5/">MySQL_布尔注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/11/03/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL_%E5%BB%B6%E6%97%B6%E6%B3%A8%E5%85%A5/">MySQL_延时注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/28/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL_union%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2/">MySQL_union联合查询</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/28/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/">MySQL数据库基本知识学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/28/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL_%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/">MySQL_报错注入</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%AF%BB%E6%89%BE%E7%9C%9F%E5%AE%9EIP/">寻找真实IP</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/">指纹识别</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E6%97%81%E7%AB%99%E5%92%8CC%E6%AE%B5/">旁站和C段</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E7%9B%AE%E5%BD%95%E6%89%AB%E6%8F%8F/">目录扫描</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/">端口扫描</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2021 <a href="/." rel="nofollow">dnsl0g's blog.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.css"><script type="text/javascript" src="/js/copycode.js" successtext="复制成功!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

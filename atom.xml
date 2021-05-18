@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>披着羊皮的狼</title>
+  <title>dnsl0g&#39;s blog</title>
   
   
-  <link href="http://zzqsmile.top/atom.xml" rel="self"/>
+  <link href="http://dnsl0g.top/atom.xml" rel="self"/>
   
-  <link href="http://zzqsmile.top/"/>
+  <link href="http://dnsl0g.top/"/>
   <updated>2020-11-03T07:37:42.238Z</updated>
-  <id>http://zzqsmile.top/</id>
+  <id>http://dnsl0g.top/</id>
   
   <author>
-    <name>John Doe</name>
+    <name>dnsl0g</name>
     
   </author>
   
@@ -18,8 +18,8 @@
   
   <entry>
     <title>MySQL_布尔注入</title>
-    <link href="http://zzqsmile.top/2020/11/03/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL_%E5%B8%83%E5%B0%94%E6%B3%A8%E5%85%A5/"/>
-    <id>http://zzqsmile.top/2020/11/03/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL_%E5%B8%83%E5%B0%94%E6%B3%A8%E5%85%A5/</id>
+    <link href="http://dnsl0g.top/2020/11/03/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL_%E5%B8%83%E5%B0%94%E6%B3%A8%E5%85%A5/"/>
+    <id>http://dnsl0g.top/2020/11/03/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL_%E5%B8%83%E5%B0%94%E6%B3%A8%E5%85%A5/</id>
     <published>2020-11-03T12:00:00.000Z</published>
     <updated>2020-11-03T07:37:42.238Z</updated>
     
@@ -30,21 +30,21 @@
     
     
     
-    <category term="测试笔记" scheme="http://zzqsmile.top/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/"/>
+    <category term="测试笔记" scheme="http://dnsl0g.top/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/"/>
     
-    <category term="SQL注入" scheme="http://zzqsmile.top/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5/"/>
+    <category term="SQL注入" scheme="http://dnsl0g.top/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5/"/>
     
-    <category term="MYSQL" scheme="http://zzqsmile.top/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5/MYSQL/"/>
+    <category term="MYSQL" scheme="http://dnsl0g.top/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5/MYSQL/"/>
     
     
-    <category term="手册" scheme="http://zzqsmile.top/tags/%E6%89%8B%E5%86%8C/"/>
+    <category term="手册" scheme="http://dnsl0g.top/tags/%E6%89%8B%E5%86%8C/"/>
     
   </entry>
   
   <entry>
     <title>MySQL_延时注入</title>
-    <link href="http://zzqsmile.top/2020/11/03/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL_%E5%BB%B6%E6%97%B6%E6%B3%A8%E5%85%A5/"/>
-    <id>http://zzqsmile.top/2020/11/03/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL_%E5%BB%B6%E6%97%B6%E6%B3%A8%E5%85%A5/</id>
+    <link href="http://dnsl0g.top/2020/11/03/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL_%E5%BB%B6%E6%97%B6%E6%B3%A8%E5%85%A5/"/>
+    <id>http://dnsl0g.top/2020/11/03/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL_%E5%BB%B6%E6%97%B6%E6%B3%A8%E5%85%A5/</id>
     <published>2020-11-03T12:00:00.000Z</published>
     <updated>2020-11-03T09:16:14.808Z</updated>
     
@@ -55,21 +55,21 @@
     
     
     
-    <category term="测试笔记" scheme="http://zzqsmile.top/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/"/>
+    <category term="测试笔记" scheme="http://dnsl0g.top/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/"/>
     
-    <category term="SQL注入" scheme="http://zzqsmile.top/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5/"/>
+    <category term="SQL注入" scheme="http://dnsl0g.top/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5/"/>
     
-    <category term="MYSQL" scheme="http://zzqsmile.top/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5/MYSQL/"/>
+    <category term="MYSQL" scheme="http://dnsl0g.top/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5/MYSQL/"/>
     
     
-    <category term="手册" scheme="http://zzqsmile.top/tags/%E6%89%8B%E5%86%8C/"/>
+    <category term="手册" scheme="http://dnsl0g.top/tags/%E6%89%8B%E5%86%8C/"/>
     
   </entry>
   
   <entry>
     <title>MySQL_union联合查询</title>
-    <link href="http://zzqsmile.top/2020/10/28/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL_union%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2/"/>
-    <id>http://zzqsmile.top/2020/10/28/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL_union%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2/</id>
+    <link href="http://dnsl0g.top/2020/10/28/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL_union%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2/"/>
+    <id>http://dnsl0g.top/2020/10/28/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL_union%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2/</id>
     <published>2020-10-28T12:00:00.000Z</published>
     <updated>2020-11-03T09:21:42.406Z</updated>
     
@@ -80,21 +80,21 @@
     
     
     
-    <category term="测试笔记" scheme="http://zzqsmile.top/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/"/>
+    <category term="测试笔记" scheme="http://dnsl0g.top/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/"/>
     
-    <category term="SQL注入" scheme="http://zzqsmile.top/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5/"/>
+    <category term="SQL注入" scheme="http://dnsl0g.top/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5/"/>
     
-    <category term="MYSQL" scheme="http://zzqsmile.top/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5/MYSQL/"/>
+    <category term="MYSQL" scheme="http://dnsl0g.top/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5/MYSQL/"/>
     
     
-    <category term="手册" scheme="http://zzqsmile.top/tags/%E6%89%8B%E5%86%8C/"/>
+    <category term="手册" scheme="http://dnsl0g.top/tags/%E6%89%8B%E5%86%8C/"/>
     
   </entry>
   
   <entry>
     <title>MySQL数据库基本知识学习</title>
-    <link href="http://zzqsmile.top/2020/10/28/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/"/>
-    <id>http://zzqsmile.top/2020/10/28/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/</id>
+    <link href="http://dnsl0g.top/2020/10/28/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/"/>
+    <id>http://dnsl0g.top/2020/10/28/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/</id>
     <published>2020-10-28T12:00:00.000Z</published>
     <updated>2020-11-02T09:01:36.849Z</updated>
     
@@ -105,21 +105,21 @@
     
     
     
-    <category term="测试笔记" scheme="http://zzqsmile.top/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/"/>
+    <category term="测试笔记" scheme="http://dnsl0g.top/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/"/>
     
-    <category term="SQL注入" scheme="http://zzqsmile.top/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5/"/>
+    <category term="SQL注入" scheme="http://dnsl0g.top/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5/"/>
     
-    <category term="MYSQL" scheme="http://zzqsmile.top/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5/MYSQL/"/>
+    <category term="MYSQL" scheme="http://dnsl0g.top/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5/MYSQL/"/>
     
     
-    <category term="手册" scheme="http://zzqsmile.top/tags/%E6%89%8B%E5%86%8C/"/>
+    <category term="手册" scheme="http://dnsl0g.top/tags/%E6%89%8B%E5%86%8C/"/>
     
   </entry>
   
   <entry>
     <title>MySQL_报错注入</title>
-    <link href="http://zzqsmile.top/2020/10/28/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL_%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/"/>
-    <id>http://zzqsmile.top/2020/10/28/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL_%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/</id>
+    <link href="http://dnsl0g.top/2020/10/28/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL_%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/"/>
+    <id>http://dnsl0g.top/2020/10/28/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/MySQL%E6%B3%A8%E5%85%A5/MySQL_%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/</id>
     <published>2020-10-28T12:00:00.000Z</published>
     <updated>2020-11-02T12:37:50.733Z</updated>
     
@@ -130,21 +130,21 @@
     
     
     
-    <category term="测试笔记" scheme="http://zzqsmile.top/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/"/>
+    <category term="测试笔记" scheme="http://dnsl0g.top/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/"/>
     
-    <category term="SQL注入" scheme="http://zzqsmile.top/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5/"/>
+    <category term="SQL注入" scheme="http://dnsl0g.top/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5/"/>
     
-    <category term="MYSQL" scheme="http://zzqsmile.top/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5/MYSQL/"/>
+    <category term="MYSQL" scheme="http://dnsl0g.top/categories/%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5/MYSQL/"/>
     
     
-    <category term="手册" scheme="http://zzqsmile.top/tags/%E6%89%8B%E5%86%8C/"/>
+    <category term="手册" scheme="http://dnsl0g.top/tags/%E6%89%8B%E5%86%8C/"/>
     
   </entry>
   
   <entry>
     <title>寻找真实IP</title>
-    <link href="http://zzqsmile.top/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%AF%BB%E6%89%BE%E7%9C%9F%E5%AE%9EIP/"/>
-    <id>http://zzqsmile.top/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%AF%BB%E6%89%BE%E7%9C%9F%E5%AE%9EIP/</id>
+    <link href="http://dnsl0g.top/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%AF%BB%E6%89%BE%E7%9C%9F%E5%AE%9EIP/"/>
+    <id>http://dnsl0g.top/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%AF%BB%E6%89%BE%E7%9C%9F%E5%AE%9EIP/</id>
     <published>2020-10-18T12:00:00.000Z</published>
     <updated>2020-10-18T07:23:08.450Z</updated>
     
@@ -164,17 +164,17 @@
     
     
     
-    <category term="信息收集" scheme="http://zzqsmile.top/categories/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
+    <category term="信息收集" scheme="http://dnsl0g.top/categories/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
     
     
-    <category term="信息收集" scheme="http://zzqsmile.top/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
+    <category term="信息收集" scheme="http://dnsl0g.top/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
     
   </entry>
   
   <entry>
     <title>指纹识别</title>
-    <link href="http://zzqsmile.top/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/"/>
-    <id>http://zzqsmile.top/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/</id>
+    <link href="http://dnsl0g.top/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/"/>
+    <id>http://dnsl0g.top/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/</id>
     <published>2020-10-18T12:00:00.000Z</published>
     <updated>2020-10-18T07:36:17.764Z</updated>
     
@@ -190,17 +190,17 @@
     
     
     
-    <category term="信息收集" scheme="http://zzqsmile.top/categories/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
+    <category term="信息收集" scheme="http://dnsl0g.top/categories/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
     
     
-    <category term="信息收集" scheme="http://zzqsmile.top/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
+    <category term="信息收集" scheme="http://dnsl0g.top/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
     
   </entry>
   
   <entry>
     <title>旁站和C段</title>
-    <link href="http://zzqsmile.top/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E6%97%81%E7%AB%99%E5%92%8CC%E6%AE%B5/"/>
-    <id>http://zzqsmile.top/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E6%97%81%E7%AB%99%E5%92%8CC%E6%AE%B5/</id>
+    <link href="http://dnsl0g.top/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E6%97%81%E7%AB%99%E5%92%8CC%E6%AE%B5/"/>
+    <id>http://dnsl0g.top/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E6%97%81%E7%AB%99%E5%92%8CC%E6%AE%B5/</id>
     <published>2020-10-18T12:00:00.000Z</published>
     <updated>2020-10-18T07:24:12.470Z</updated>
     
@@ -221,17 +221,17 @@
     
     
     
-    <category term="信息收集" scheme="http://zzqsmile.top/categories/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
+    <category term="信息收集" scheme="http://dnsl0g.top/categories/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
     
     
-    <category term="信息收集" scheme="http://zzqsmile.top/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
+    <category term="信息收集" scheme="http://dnsl0g.top/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
     
   </entry>
   
   <entry>
     <title>目录扫描</title>
-    <link href="http://zzqsmile.top/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E7%9B%AE%E5%BD%95%E6%89%AB%E6%8F%8F/"/>
-    <id>http://zzqsmile.top/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E7%9B%AE%E5%BD%95%E6%89%AB%E6%8F%8F/</id>
+    <link href="http://dnsl0g.top/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E7%9B%AE%E5%BD%95%E6%89%AB%E6%8F%8F/"/>
+    <id>http://dnsl0g.top/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E7%9B%AE%E5%BD%95%E6%89%AB%E6%8F%8F/</id>
     <published>2020-10-18T12:00:00.000Z</published>
     <updated>2020-10-18T07:41:14.866Z</updated>
     
@@ -251,17 +251,17 @@
     
     
     
-    <category term="信息收集" scheme="http://zzqsmile.top/categories/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
+    <category term="信息收集" scheme="http://dnsl0g.top/categories/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
     
     
-    <category term="信息收集" scheme="http://zzqsmile.top/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
+    <category term="信息收集" scheme="http://dnsl0g.top/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
     
   </entry>
   
   <entry>
     <title>端口扫描</title>
-    <link href="http://zzqsmile.top/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/"/>
-    <id>http://zzqsmile.top/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/</id>
+    <link href="http://dnsl0g.top/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/"/>
+    <id>http://dnsl0g.top/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/</id>
     <published>2020-10-18T12:00:00.000Z</published>
     <updated>2020-10-18T07:51:26.695Z</updated>
     
@@ -280,17 +280,17 @@
     
     
     
-    <category term="信息收集" scheme="http://zzqsmile.top/categories/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
+    <category term="信息收集" scheme="http://dnsl0g.top/categories/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
     
     
-    <category term="信息收集" scheme="http://zzqsmile.top/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
+    <category term="信息收集" scheme="http://dnsl0g.top/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
     
   </entry>
   
   <entry>
     <title>参考</title>
-    <link href="http://zzqsmile.top/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%8F%82%E8%80%83/"/>
-    <id>http://zzqsmile.top/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%8F%82%E8%80%83/</id>
+    <link href="http://dnsl0g.top/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%8F%82%E8%80%83/"/>
+    <id>http://dnsl0g.top/2020/10/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%8F%82%E8%80%83/</id>
     <published>2020-10-18T12:00:00.000Z</published>
     <updated>2020-10-18T07:52:55.904Z</updated>
     
@@ -311,17 +311,17 @@
     
     
     
-    <category term="信息收集" scheme="http://zzqsmile.top/categories/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
+    <category term="信息收集" scheme="http://dnsl0g.top/categories/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
     
     
-    <category term="信息收集" scheme="http://zzqsmile.top/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
+    <category term="信息收集" scheme="http://dnsl0g.top/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
     
   </entry>
   
   <entry>
     <title>XSS Bypass</title>
-    <link href="http://zzqsmile.top/2020/10/18/web%E5%AE%89%E5%85%A8/XSS/XSS%20Bypass/"/>
-    <id>http://zzqsmile.top/2020/10/18/web%E5%AE%89%E5%85%A8/XSS/XSS%20Bypass/</id>
+    <link href="http://dnsl0g.top/2020/10/18/web%E5%AE%89%E5%85%A8/XSS/XSS%20Bypass/"/>
+    <id>http://dnsl0g.top/2020/10/18/web%E5%AE%89%E5%85%A8/XSS/XSS%20Bypass/</id>
     <published>2020-10-18T12:00:00.000Z</published>
     <updated>2020-10-18T08:12:59.127Z</updated>
     
@@ -332,19 +332,19 @@
     
     
     
-    <category term="web安全" scheme="http://zzqsmile.top/categories/web%E5%AE%89%E5%85%A8/"/>
+    <category term="web安全" scheme="http://dnsl0g.top/categories/web%E5%AE%89%E5%85%A8/"/>
     
-    <category term="XSS" scheme="http://zzqsmile.top/categories/web%E5%AE%89%E5%85%A8/XSS/"/>
+    <category term="XSS" scheme="http://dnsl0g.top/categories/web%E5%AE%89%E5%85%A8/XSS/"/>
     
     
-    <category term="XSS" scheme="http://zzqsmile.top/tags/XSS/"/>
+    <category term="XSS" scheme="http://dnsl0g.top/tags/XSS/"/>
     
   </entry>
   
   <entry>
     <title>XSS Payload</title>
-    <link href="http://zzqsmile.top/2020/10/18/web%E5%AE%89%E5%85%A8/XSS/XSS%20Payload/"/>
-    <id>http://zzqsmile.top/2020/10/18/web%E5%AE%89%E5%85%A8/XSS/XSS%20Payload/</id>
+    <link href="http://dnsl0g.top/2020/10/18/web%E5%AE%89%E5%85%A8/XSS/XSS%20Payload/"/>
+    <id>http://dnsl0g.top/2020/10/18/web%E5%AE%89%E5%85%A8/XSS/XSS%20Payload/</id>
     <published>2020-10-18T12:00:00.000Z</published>
     <updated>2020-10-18T08:12:01.229Z</updated>
     
@@ -355,19 +355,19 @@
     
     
     
-    <category term="web安全" scheme="http://zzqsmile.top/categories/web%E5%AE%89%E5%85%A8/"/>
+    <category term="web安全" scheme="http://dnsl0g.top/categories/web%E5%AE%89%E5%85%A8/"/>
     
-    <category term="XSS" scheme="http://zzqsmile.top/categories/web%E5%AE%89%E5%85%A8/XSS/"/>
+    <category term="XSS" scheme="http://dnsl0g.top/categories/web%E5%AE%89%E5%85%A8/XSS/"/>
     
     
-    <category term="XSS" scheme="http://zzqsmile.top/tags/XSS/"/>
+    <category term="XSS" scheme="http://dnsl0g.top/tags/XSS/"/>
     
   </entry>
   
   <entry>
     <title>whois信息查询</title>
-    <link href="http://zzqsmile.top/2020/10/15/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/whois%E4%BF%A1%E6%81%AF%E6%9F%A5%E8%AF%A2/"/>
-    <id>http://zzqsmile.top/2020/10/15/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/whois%E4%BF%A1%E6%81%AF%E6%9F%A5%E8%AF%A2/</id>
+    <link href="http://dnsl0g.top/2020/10/15/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/whois%E4%BF%A1%E6%81%AF%E6%9F%A5%E8%AF%A2/"/>
+    <id>http://dnsl0g.top/2020/10/15/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/whois%E4%BF%A1%E6%81%AF%E6%9F%A5%E8%AF%A2/</id>
     <published>2020-10-15T12:00:00.000Z</published>
     <updated>2020-10-15T13:42:43.668Z</updated>
     
@@ -387,17 +387,17 @@
     
     
     
-    <category term="信息收集" scheme="http://zzqsmile.top/categories/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
+    <category term="信息收集" scheme="http://dnsl0g.top/categories/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
     
     
-    <category term="信息收集" scheme="http://zzqsmile.top/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
+    <category term="信息收集" scheme="http://dnsl0g.top/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
     
   </entry>
   
   <entry>
     <title>子域名收集</title>
-    <link href="http://zzqsmile.top/2020/10/15/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%AD%90%E5%9F%9F%E5%90%8D%E6%94%B6%E9%9B%86/"/>
-    <id>http://zzqsmile.top/2020/10/15/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%AD%90%E5%9F%9F%E5%90%8D%E6%94%B6%E9%9B%86/</id>
+    <link href="http://dnsl0g.top/2020/10/15/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%AD%90%E5%9F%9F%E5%90%8D%E6%94%B6%E9%9B%86/"/>
+    <id>http://dnsl0g.top/2020/10/15/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%AD%90%E5%9F%9F%E5%90%8D%E6%94%B6%E9%9B%86/</id>
     <published>2020-10-15T12:00:00.000Z</published>
     <updated>2020-10-15T13:42:22.418Z</updated>
     
@@ -417,17 +417,17 @@
     
     
     
-    <category term="信息收集" scheme="http://zzqsmile.top/categories/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
+    <category term="信息收集" scheme="http://dnsl0g.top/categories/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
     
     
-    <category term="信息收集" scheme="http://zzqsmile.top/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
+    <category term="信息收集" scheme="http://dnsl0g.top/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
     
   </entry>
   
   <entry>
     <title>备案信息查询</title>
-    <link href="http://zzqsmile.top/2020/10/15/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%A4%87%E6%A1%88%E4%BF%A1%E6%81%AF%E6%9F%A5%E8%AF%A2/"/>
-    <id>http://zzqsmile.top/2020/10/15/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%A4%87%E6%A1%88%E4%BF%A1%E6%81%AF%E6%9F%A5%E8%AF%A2/</id>
+    <link href="http://dnsl0g.top/2020/10/15/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%A4%87%E6%A1%88%E4%BF%A1%E6%81%AF%E6%9F%A5%E8%AF%A2/"/>
+    <id>http://dnsl0g.top/2020/10/15/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/%E5%A4%87%E6%A1%88%E4%BF%A1%E6%81%AF%E6%9F%A5%E8%AF%A2/</id>
     <published>2020-10-15T12:00:00.000Z</published>
     <updated>2020-10-15T13:42:26.632Z</updated>
     
@@ -448,17 +448,17 @@
     
     
     
-    <category term="信息收集" scheme="http://zzqsmile.top/categories/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
+    <category term="信息收集" scheme="http://dnsl0g.top/categories/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
     
     
-    <category term="信息收集" scheme="http://zzqsmile.top/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
+    <category term="信息收集" scheme="http://dnsl0g.top/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
     
   </entry>
   
   <entry>
     <title>Hello World</title>
-    <link href="http://zzqsmile.top/2020/08/19/hello-world/"/>
-    <id>http://zzqsmile.top/2020/08/19/hello-world/</id>
+    <link href="http://dnsl0g.top/2020/08/19/hello-world/"/>
+    <id>http://dnsl0g.top/2020/08/19/hello-world/</id>
     <published>2020-08-19T15:27:43.330Z</published>
     <updated>2020-08-24T14:34:01.790Z</updated>
     
@@ -477,8 +477,8 @@
   
   <entry>
     <title>实现姓名汉字转成拼音</title>
-    <link href="http://zzqsmile.top/2019/09/13/python3/%E5%A7%93%E5%90%8D%E6%B1%89%E5%AD%97%E8%BD%AC%E6%8B%BC%E9%9F%B3/"/>
-    <id>http://zzqsmile.top/2019/09/13/python3/%E5%A7%93%E5%90%8D%E6%B1%89%E5%AD%97%E8%BD%AC%E6%8B%BC%E9%9F%B3/</id>
+    <link href="http://dnsl0g.top/2019/09/13/python3/%E5%A7%93%E5%90%8D%E6%B1%89%E5%AD%97%E8%BD%AC%E6%8B%BC%E9%9F%B3/"/>
+    <id>http://dnsl0g.top/2019/09/13/python3/%E5%A7%93%E5%90%8D%E6%B1%89%E5%AD%97%E8%BD%AC%E6%8B%BC%E9%9F%B3/</id>
     <published>2019-09-13T01:00:00.000Z</published>
     <updated>2019-09-25T09:48:14.000Z</updated>
     
@@ -489,17 +489,17 @@
     
     
     
-    <category term="python3" scheme="http://zzqsmile.top/categories/python3/"/>
+    <category term="python3" scheme="http://dnsl0g.top/categories/python3/"/>
     
     
-    <category term="小工具" scheme="http://zzqsmile.top/tags/%E5%B0%8F%E5%B7%A5%E5%85%B7/"/>
+    <category term="小工具" scheme="http://dnsl0g.top/tags/%E5%B0%8F%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
   <entry>
     <title>工具导航</title>
-    <link href="http://zzqsmile.top/2019/08/25/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/%E5%B7%A5%E5%85%B7%E5%AF%BC%E8%88%AA/"/>
-    <id>http://zzqsmile.top/2019/08/25/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/%E5%B7%A5%E5%85%B7%E5%AF%BC%E8%88%AA/</id>
+    <link href="http://dnsl0g.top/2019/08/25/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/%E5%B7%A5%E5%85%B7%E5%AF%BC%E8%88%AA/"/>
+    <id>http://dnsl0g.top/2019/08/25/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/%E5%B7%A5%E5%85%B7%E5%AF%BC%E8%88%AA/</id>
     <published>2019-08-25T01:00:00.000Z</published>
     <updated>2020-08-23T12:00:08.671Z</updated>
     
@@ -510,17 +510,17 @@
     
     
     
-    <category term="工具" scheme="http://zzqsmile.top/categories/%E5%B7%A5%E5%85%B7/"/>
+    <category term="工具" scheme="http://dnsl0g.top/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
-    <category term="传送门" scheme="http://zzqsmile.top/tags/%E4%BC%A0%E9%80%81%E9%97%A8/"/>
+    <category term="传送门" scheme="http://dnsl0g.top/tags/%E4%BC%A0%E9%80%81%E9%97%A8/"/>
     
   </entry>
   
   <entry>
     <title>渗透测试流程导航</title>
-    <link href="http://zzqsmile.top/2019/08/25/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
-    <id>http://zzqsmile.top/2019/08/25/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/</id>
+    <link href="http://dnsl0g.top/2019/08/25/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    <id>http://dnsl0g.top/2019/08/25/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/</id>
     <published>2019-08-25T01:00:00.000Z</published>
     <updated>2020-08-23T12:03:04.876Z</updated>
     
@@ -536,10 +536,10 @@
     
     
     
-    <category term="渗透测试" scheme="http://zzqsmile.top/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    <category term="渗透测试" scheme="http://dnsl0g.top/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
     
-    <category term="传送门" scheme="http://zzqsmile.top/tags/%E4%BC%A0%E9%80%81%E9%97%A8/"/>
+    <category term="传送门" scheme="http://dnsl0g.top/tags/%E4%BC%A0%E9%80%81%E9%97%A8/"/>
     
   </entry>
   
